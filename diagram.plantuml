@@ -1,0 +1,60 @@
+@startuml Kino
+interface FilmManager {
+    +dodajFilm()
+    +usunFilm()
+}
+
+interface SalaManager {
+    +dodajSale()
+    +usunSale()
+    +zakolejkujFilm()
+    +usunFilm()
+}
+
+class Sala {
+    -String nazwa
+    -int liczbaSiedzen
+    -int liczbaRzędów
+    -Film Film
+    -Date godzina
+}
+
+class Film {
+    -String tytul
+    -int długość
+}
+
+class Bilet {
+    -Typ typ
+    -float cena
+    -Film film
+}
+
+class Typ {
+    -int znizka
+}
+
+Typ --|> Vip
+Typ --|> Studencki
+Typ --|> Grupowy
+
+class Vip {
+    -int znizka
+}
+
+class Grupowy {
+    -int znizka
+    -int liczbaOsob
+}
+
+class Studencki {
+    -int znizka
+    -int wiek
+    -Date dataRozpoczęciaStudiów
+}
+
+Sala o-- Film
+Bilet o-- Sala
+
+
+@enduml
