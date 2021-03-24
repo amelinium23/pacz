@@ -1,60 +1,73 @@
 @startuml Kino
-interface FilmManager {
-    +dodajFilm()
-    +usunFilm()
+class FilmManager {
+    -List filmList
+    +addFilm()
+    +deleteFilm()
+    +getFilmList()
 }
 
-interface SalaManager {
-    +dodajSale()
-    +usunSale()
-    +zakolejkujFilm()
-    +usunFilm()
+class ScreeningRoomManager {
+    -List roomsList
+    +addScreeningRoom()
+    +deleteScreeningRoom()
+    +addFilmToRoom()
+    +deleteFilmFromRoom()
+    +getRoomsList()
 }
 
-class Sala {
-    -String nazwa
-    -int liczbaSiedzen
-    -int liczbaRzędów
-    -Film Film
-    -Date godzina
+class TicketManager {
+    -List ticketList
+    +addTicket()
+    +removeTicket()
+    +getTicketList()
+}
+
+class ScreeningRoom {
+    -String name
+    -int seats
+    -int rowNumber
+    -Screening screening
+    -Date beginHour
 }
 
 class Film {
-    -String tytul
-    -int długość
+    -String title
+    -int length
 }
 
-class Bilet {
-    -Typ typ
-    -float cena
+class Screening {
+    -Time beginTime
+    -Date screeningDate
     -Film film
+    -ScreeningRoom screeningRoom
 }
 
-class Typ {
-    -int znizka
+ScreeningRoom o-- Screening
+
+abstract class Ticket {
+    -float price
+    -Film film
+    -int rowNumber
+    +calculatePrice()
 }
 
-Typ --|> Vip
-Typ --|> Studencki
-Typ --|> Grupowy
+Ticket --|> Student
+Ticket --|> Group
+Ticket --|> Normal
 
-class Vip {
-    -int znizka
+class Group {
+    -int discount
+    -int numberOfPeople
 }
 
-class Grupowy {
-    -int znizka
-    -int liczbaOsob
+class Student {
+    -int discount
+    -int age
 }
 
-class Studencki {
-    -int znizka
-    -int wiek
-    -Date dataRozpoczęciaStudiów
-}
+class Normal {
 
-Sala o-- Film
-Bilet o-- Sala
+}
 
 
 @enduml
