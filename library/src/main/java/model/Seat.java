@@ -1,11 +1,23 @@
 package model;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+import java.util.List;
+
+@Entity
+@Data
+@NoArgsConstructor
 public class Seat {
+    @Id
+    @GeneratedValue
+    private Long id;
     private int row;
     private int number;
-
-    public Seat(int row, int number) {
-        this.row = row;
-        this.number = number;
-    }
+    @ManyToOne
+    @JoinColumn(name="screeningroom_id")
+    private ScreeningRoom screeningRoom;
+    @OneToMany
+    private List<SeatReservation> reservations;
 }

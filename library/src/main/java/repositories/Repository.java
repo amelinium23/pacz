@@ -11,4 +11,7 @@ public abstract class Repository<T> {
     public int size() {
         return objects.size();
     }
+    public boolean contains(T element) {
+        return objects.contains(element);
+    }
 }
