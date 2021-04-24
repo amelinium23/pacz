@@ -22,7 +22,7 @@ public abstract class Ticket {
 
     public abstract float calculatePrice();
 
-    public Ticket(float basePrice, Screening screening, SeatReservation seat) {
+    protected Ticket(float basePrice, Screening screening, SeatReservation seat) {
         this.basePrice = basePrice;
         this.screening = screening;
         this.seat = seat;

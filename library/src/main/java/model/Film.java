@@ -3,9 +3,9 @@ package model;
 import lombok.Data;
 
 import lombok.NoArgsConstructor;
+import org.hibernate.collection.internal.PersistentList;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -25,5 +25,5 @@ public class Film {
     }
 
     @OneToMany(mappedBy = "film", cascade = CascadeType.ALL)
-    private List<Screening> screenings = new ArrayList<>();
+    private List<Screening> screenings = new PersistentList<>();
 }

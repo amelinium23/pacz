@@ -7,7 +7,7 @@ public class MainScreenController {
     public Button quitButton;
 
     public void quit() {
-        Stage stage = (Stage) quitButton.getScene().getWindow();
+        var stage = (Stage) quitButton.getScene().getWindow();
         stage.close();
     }
 }

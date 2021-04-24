@@ -2,6 +2,7 @@ package model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.collection.internal.PersistentList;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -21,7 +22,7 @@ public class Screening {
     @JoinColumn(name="film_id")
     private Film film;
     @OneToMany
-    private List<SeatReservation> reservations;
+    private List<SeatReservation> reservations = new PersistentList<>();
 
     @ManyToOne
     private ScreeningRoom screeningRoom;

@@ -4,7 +4,7 @@
              http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd"
              version="2.2">
 
-    <persistence-unit name="Tickets" transaction-type="RESOURCE_LOCAL">
+    <persistence-unit name="Cinema" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <class>model.Ticket</class>
         <class>model.Screening</class>
@@ -12,6 +12,9 @@
         <class>model.ScreeningRoom</class>
         <class>model.Discounted</class>
         <class>model.Normal</class>
+        <class>model.Seat</class>
+        <class>model.SeatReservation</class>
+        <class>model.Group</class>
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" /> <!-- DB Driver -->
             <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost/pacz" /> <!-- BD Mane -->

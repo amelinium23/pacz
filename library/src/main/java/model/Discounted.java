@@ -7,7 +7,11 @@ import javax.persistence.Entity;
 @Entity
 @NoArgsConstructor
 public class Discounted extends Ticket {
-    public float discount;
+    private float discount;
+
+    public void setDiscount(float discount) {
+        this.discount = discount;
+    }
 
     public Discounted(float price, Screening screening, SeatReservation seat, float discount) {
         super(price, screening, seat);
