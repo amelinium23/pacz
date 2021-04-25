@@ -1,26 +1,28 @@
-body {
-  background-color: "black";
-}
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap");
+
 .Screening {
   width: fit-content;
   height: fit-content;
   margin: auto;
   padding: 10;
+  font-family: "Roboto";
 }
 
 #reserve {
   margin-top: 10px;
   background-color: lightgrey;
   color: white;
-  margin-left: 33.5%;
+  margin-left: 35.9%;
   font-size: 14px;
   color: black;
+  font-family: "Roboto";
 }
 
 #s1 {
   border: 6px, solid, lightgrey;
   background-color: lightgrey;
   color: white;
+  font-family: "Roboto";
 }
 
 #s1 > * {
@@ -38,4 +40,10 @@ body {
   font-size: 14px;
   margin-top: 10px;
   color: white;
+  font-family: "Roboto";
+}
+
+.Title {
+  font-size: 18px;
+  text-align: center;
 }

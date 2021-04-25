@@ -26,12 +26,13 @@ const rows = [
   createData("9"),
 ];
 
-export default function Screening() {
+export default function Screening({ number }) {
   const [edit, setEdit] = React.useState(false);
-  const [counter, set] = React.useState(0);
+  const [colorButton, setColorButton] = React.useState(true);
 
   return (
-    <div class="Screening">
+    <div className="Screening">
+      <p class="Title">Sala nr.{number}</p>
       {edit ? (
         <Table
           id="s1"
@@ -62,6 +63,7 @@ export default function Screening() {
                     fontSize: "16px",
                     fontWeight: "bold",
                   }}
+                  key={i}
                 >
                   {i}
                 </TableCell>
@@ -90,15 +92,97 @@ export default function Screening() {
                   {row.number}
                 </TableCell>
                 {[
-                  <Button id="1" />,
-                  <Button id="2" />,
-                  <Button id="3" />,
-                  <Button id="4" />,
-                  <Button id="5" />,
-                  <Button id="6" />,
-                  <Button id="7" />,
-                  <Button id="8" />,
-                  <Button id="9" />,
+                  <Button
+                    id="1"
+                    key={1}
+                    style={
+                      colorButton
+                        ? { backgroundColor: "green" }
+                        : { backgroundColor: "red" }
+                    }
+                    onClick={() => setColorButton(!colorButton)}
+                  />,
+                  <Button
+                    id="2"
+                    key={2}
+                    style={
+                      colorButton
+                        ? { backgroundColor: "green" }
+                        : { backgroundColor: "red" }
+                    }
+                    onClick={() => setColorButton(!colorButton)}
+                  />,
+                  <Button
+                    id="3"
+                    key={3}
+                    style={
+                      colorButton
+                        ? { backgroundColor: "green" }
+                        : { backgroundColor: "red" }
+                    }
+                    onClick={() => setColorButton(!colorButton)}
+                  />,
+                  <Button
+                    id="4"
+                    key={4}
+                    style={
+                      colorButton
+                        ? { backgroundColor: "green" }
+                        : { backgroundColor: "red" }
+                    }
+                    onClick={() => setColorButton(!colorButton)}
+                  />,
+                  <Button
+                    id="5"
+                    key={5}
+                    style={
+                      colorButton
+                        ? { backgroundColor: "green" }
+                        : { backgroundColor: "red" }
+                    }
+                    onClick={() => setColorButton(!colorButton)}
+                  />,
+                  <Button
+                    id="6"
+                    key={6}
+                    style={
+                      colorButton
+                        ? { backgroundColor: "green" }
+                        : { backgroundColor: "red" }
+                    }
+                    onClick={() => setColorButton(!colorButton)}
+                  />,
+                  <Button
+                    id="7"
+                    key={7}
+                    style={
+                      colorButton
+                        ? { backgroundColor: "green" }
+                        : { backgroundColor: "red" }
+                    }
+                    onClick={() => setColorButton(!colorButton)}
+                  />,
+
+                  <Button
+                    id="8"
+                    key={8}
+                    style={
+                      colorButton
+                        ? { backgroundColor: "green" }
+                        : { backgroundColor: "red" }
+                    }
+                    onClick={() => setColorButton(!colorButton)}
+                  />,
+                  <Button
+                    id="9"
+                    key={9}
+                    style={
+                      colorButton
+                        ? { backgroundColor: "green" }
+                        : { backgroundColor: "red" }
+                    }
+                    onClick={() => setColorButton(!colorButton)}
+                  />,
                 ].map((i) => (
                   <TableCell
                     style={{
@@ -107,6 +191,7 @@ export default function Screening() {
                       fontSize: "16px",
                       fontWeight: "bold",
                     }}
+                    key={i}
                   >
                     {i}
                   </TableCell>
@@ -140,6 +225,7 @@ export default function Screening() {
                     fontSize: "16px",
                     fontWeight: "bold",
                   }}
+                  key={i}
                 >
                   {i}
                 </TableCell>
@@ -168,15 +254,15 @@ export default function Screening() {
                   {row.number}
                 </TableCell>
                 {[
-                  <Button id="1" disabled={true} />,
-                  <Button id="2" disabled={true} />,
-                  <Button id="3" disabled={true} />,
-                  <Button id="4" disabled={true} />,
-                  <Button id="5" disabled={true} />,
-                  <Button id="6" disabled={true} />,
-                  <Button id="7" disabled={true} />,
-                  <Button id="8" disabled={true} />,
-                  <Button id="9" disabled={true} />,
+                  <Button id="1" disabled={true} key={1} />,
+                  <Button id="2" disabled={true} key={2} />,
+                  <Button id="3" disabled={true} key={3} />,
+                  <Button id="4" disabled={true} key={4} />,
+                  <Button id="5" disabled={true} key={5} />,
+                  <Button id="6" disabled={true} key={6} />,
+                  <Button id="7" disabled={true} key={7} />,
+                  <Button id="8" disabled={true} key={8} />,
+                  <Button id="9" disabled={true} key={9} />,
                 ].map((i) => (
                   <TableCell
                     id={i}
@@ -185,8 +271,8 @@ export default function Screening() {
                       fontSize: "16px",
                       fontWeight: "bold",
                     }}
+                    key={i}
                   >
-                    {console.log(document.getElementById("1"))}
                     {i}
                   </TableCell>
                 ))}

@@ -1,11 +1,12 @@
 import React from "react";
 // import "./App.css";
-import Screening from "./Screening.js";
+// import Screening from "./Screening.js";
+import Home from "./Home.js";
 
 function App() {
   return (
-    <div>
-      <Screening />
+    <div id="root">
+      <Home />
     </div>
   );
 }
