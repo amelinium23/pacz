@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Button } from "@material-ui/core";
 import Film from "./Film";
 
 function App() {
@@ -46,6 +47,30 @@ function App() {
     // </Button>
     // <Screening number={1} />
     <div>
+      <header id="header" class="title">
+        Zarządzanie filmami <br />
+        <Button
+          style={{
+            marginLeft: "10px",
+            border: "2px solid #2E2E2E",
+            backgroundColor: "white",
+            marginTop: "10px",
+          }}
+        >
+          Edytuj sale
+        </Button>
+        <Button
+          style={{
+            marginLeft: "10px",
+            border: "2px solid #2E2E2E",
+            backgroundColor: "white",
+            marginTop: "10px",
+          }}
+        >
+          Zarezerwuj miejsca
+        </Button>
+      </header>
+
       <Film />
     </div>
   );

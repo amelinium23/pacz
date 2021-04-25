@@ -1,37 +1,24 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@material-ui/core";
 import "./films.css";
 
-const FILMS = [
-  {
-    id: 1,
-    name: "chuj",
-    length: 100,
-  },
-  {
-    id: 2,
-    name: "chuj",
-    length: 100,
-  },
-  {
-    id: 3,
-    name: "chuj",
-    length: 100,
-  },
-  {
-    id: 4,
-    name: "chuj",
-    length: 100,
-  },
-];
-
-export default function Film(props) {
+export default function Film() {
   const [films, setFilms] = useState([]);
-  const { name, length } = props;
 
-  return FILMS.map((i) => (
+  async function requestsFilms() {
+    const res = await fetch(`http://localhost:8080/films`);
+    const json = await res.json();
+    console.log(json);
+    setFilms(json);
+  }
+
+  useEffect(() => {
+    requestsFilms();
+  }, [films]);
+
+  return films.map((i) => (
     <div class="films">
-      <p class="title">Tytuł: {i.name}</p>
+      <p class="title">Tytuł: {i.title}</p>
       <p class="length">Długość filmu: {i.length} min</p>
       <Button
         style={{
@@ -39,6 +26,7 @@ export default function Film(props) {
           backgroundColor: "white",
           border: "1px solid black",
           marginLeft: "22.5%",
+          marginTop: "10px",
         }}
       >
         Zedytuj mnie
@@ -48,7 +36,8 @@ export default function Film(props) {
           alignSelf: "center",
           backgroundColor: "white",
           border: "1px solid black",
-          marginLeft: "12px",
+          marginLeft: "4%",
+          marginTop: "10px",
         }}
       >
         Usuń mnie
