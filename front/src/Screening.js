@@ -141,7 +141,7 @@ export default function Screening({ number }) {
                         : { backgroundColor: "red" }
                     }
                     onClick={() => setColorButton(!colorButton)}
-                  />,
+                  ></Button>,
                   <Button
                     id="6"
                     key={6}
@@ -175,7 +175,6 @@ export default function Screening({ number }) {
                   />,
                   <Button
                     id="9"
-                    key={9}
                     style={
                       colorButton
                         ? { backgroundColor: "green" }
@@ -183,7 +182,7 @@ export default function Screening({ number }) {
                     }
                     onClick={() => setColorButton(!colorButton)}
                   />,
-                ].map((i) => (
+                ].map((i, index) => (
                   <TableCell
                     style={{
                       border: "1px solid black",

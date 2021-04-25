@@ -1,0 +1,31 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap");
+
+body {
+  background-color: lightgrey;
+  padding: 10px;
+  margin-left: 10px;
+  text-decoration: none;
+  font-family: "Roboto";
+}
+body > * {
+  margin-left: 35%;
+}
+
+.films {
+  border: 1px solid dimgrey;
+  font-family: "Roboto";
+  margin: 10px;
+  padding: 10px;
+  align-items: center;
+  width: 40%;
+}
+
+.length {
+  font-size: 14px;
+  text-align: center;
+}
+
+.title {
+  text-align: center;
+  font-size: 20px;
+}
