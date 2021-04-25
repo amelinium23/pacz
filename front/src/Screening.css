@@ -1,0 +1,41 @@
+body {
+  background-color: "black";
+}
+.Screening {
+  width: fit-content;
+  height: fit-content;
+  margin: auto;
+  padding: 10;
+}
+
+#reserve {
+  margin-top: 10px;
+  background-color: lightgrey;
+  color: white;
+  margin-left: 33.5%;
+  font-size: 14px;
+  color: black;
+}
+
+#s1 {
+  border: 6px, solid, lightgrey;
+  background-color: lightgrey;
+  color: white;
+}
+
+#s1 > * {
+  border: 1px solid lightgrey;
+}
+
+#s1 > th {
+  font-size: 14px;
+  font-weight: "bold";
+}
+
+#submit {
+  background-color: red;
+  margin-left: 20px;
+  font-size: 14px;
+  margin-top: 10px;
+  color: white;
+}
