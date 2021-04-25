@@ -21,18 +21,13 @@ public class ScreeningRoom {
     private int seatsInRow;
     @OneToMany(mappedBy = "screeningRoom", cascade = CascadeType.ALL)
     private List<Screening> screenings = new ArrayList<>();
-    @OneToMany(mappedBy = "screeningRoom", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "screeningRoom", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Seat> seats = new ArrayList<>();
 
     public ScreeningRoom(String name, int rowNumber, int seatsInRow) {
         this.name = name;
         this.rowNumber = rowNumber;
         this.seatsInRow = seatsInRow;
-        for (var i = 1; i <= rowNumber; i++) {
-            for (var j = 1; j <= seatsInRow; j++) {
-                seats.add(new Seat(i, j));
-            }
-        }
     }
 
     public Seat getSeat(int row, int number) {

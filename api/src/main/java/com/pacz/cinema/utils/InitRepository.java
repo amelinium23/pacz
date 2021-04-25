@@ -1,7 +1,7 @@
 package com.pacz.cinema.utils;
 
-import com.pacz.cinema.model.entities.*;
 import com.pacz.cinema.model.repositories.*;
+import com.pacz.cinema.model.services.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,27 +16,19 @@ public class InitRepository {
     CommandLineRunner init(TicketRepository ticketRepo, FilmRepository filmRepo,
                            ScreeningRepository screeningRepo, ScreeningRoomRepository roomRepo,
                            SeatReservationRepository reservationRepo, SeatRepository seatRepo) {
+        var filmService = new FilmService(filmRepo);
+        var reservationService = new ReservationService(screeningRepo, seatRepo, reservationRepo);
+        var screeningRoomService = new ScreeningRoomService(roomRepo);
+        var screeningService = new ScreeningService(screeningRepo, roomRepo, filmRepo);
+        var ticketService = new TicketService(ticketRepo, screeningRepo, reservationService);
         return args -> {
-            var pokuj = new ScreeningRoom("Sala 1", 5, 5);
-            roomRepo.save(pokuj);
-            var film = new Film("Najmanito The Movie", 200);
-            filmRepo.save(film);
-            var premiera = new Screening(LocalTime.now(), LocalDate.now(), film, pokuj);
-            screeningRepo.save(premiera);
-            seatRepo.saveAll(pokuj.getSeats());
-
-
-            ticketRepo.save(new Normal(15.40f, premiera,
-                    reservationRepo.save(new SeatReservation(pokuj.getSeat(1, 1), premiera))));
-            var group1 = reservationRepo.save(new SeatReservation(pokuj.getSeat(1, 2), premiera));
-            var group2 = reservationRepo.save(new SeatReservation(pokuj.getSeat(1, 2), premiera));
-            var group3 = reservationRepo.save(new SeatReservation(pokuj.getSeat(1, 3), premiera));
-            var group4 = reservationRepo.save(new SeatReservation(pokuj.getSeat(1, 4), premiera));
-            var group5 = reservationRepo.save(new SeatReservation(pokuj.getSeat(1, 5), premiera));
-            var group6 = reservationRepo.save(new SeatReservation(pokuj.getSeat(2, 1), premiera));
-
-
-            ticketRepo.save(new Group(15.40f, premiera, List.of(group1, group2, group3, group4, group5, group6), 6));
+            var pokuj = screeningRoomService.createScreeningRoom("Sala 1", 5, 5);
+            var film = filmService.createFilm("Najmanito the Movie", 200);
+            var premiera = screeningService.createScreening(LocalDate.now(), LocalTime.now(), film.getId(), pokuj.getId());
+            ticketService.createNormalTicket(15.40f, premiera.getId(), 1, 1);
+            var seats = List.of(new int[]{1, 2}, new int[]{1, 3},
+            new int[]{1, 4}, new int[]{1, 5}, new int[]{2, 1}, new int[]{2, 2});
+            ticketService.createGroupTicket(15.40f, seats.size(), seats, premiera.getId());
         };
     }
 }
