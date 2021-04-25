@@ -19,7 +19,7 @@ public class TicketService {
     private final ReservationService reservationService;
 
     public TicketService(TicketRepository ticketRepository, ScreeningRepository screeningRepository,
-                         SeatReservationRepository seatReservationRepository, ReservationService reservationService) {
+                         ReservationService reservationService) {
         this.ticketRepository = ticketRepository;
         this.screeningRepository = screeningRepository;
         this.reservationService = reservationService;
@@ -40,7 +40,7 @@ public class TicketService {
             var reservation = reservationService.makeReservation(screeningId, row, column);
             var screening = screeningRepository.findById(screeningId);
             return ticketRepository.save(new Discounted(price, screening.get(), reservation, discount));
-        } catch (Exception e) {
+        } catch (ScreeningNotFoundException e) {
             return null;
         }
     }
@@ -51,7 +51,7 @@ public class TicketService {
                     .makeReservation(screeningId, seat[0], seat[1])).collect(Collectors.toList());
             var screening = screeningRepository.findById(screeningId);
             return ticketRepository.save(new Group(price, screening.get(), reservations, numberOfPeople));
-        } catch (Exception e) {
+        } catch (ScreeningNotFoundException e) {
             return null;
         }
     }

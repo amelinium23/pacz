@@ -36,12 +36,12 @@ public class ReservationService {
     }
 
     public SeatReservation makeReservation(Long screeningId, int row, int seatNumber) {
-            var screening = screeningRepository.findById(screeningId);
-            if (screening.isPresent()) {
+        var screening = screeningRepository.findById(screeningId);
+        if (screening.isPresent()) {
                 var seatToReserve = screening.get().getScreeningRoom().getSeat(row, seatNumber);
-                return seatReservationRepository.save(new SeatReservation(seatToReserve, screening.get()));
+                return seatReservationRepository.saveAndFlush(new SeatReservation(seatToReserve, screening.get()));
             }
-            throw new ScreeningNotFoundException(screeningId);
+        throw new ScreeningNotFoundException(screeningId);
     }
     
 }

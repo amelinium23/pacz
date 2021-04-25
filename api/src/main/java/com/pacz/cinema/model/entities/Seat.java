@@ -17,7 +17,7 @@ public class Seat {
     private int row;
     private int number;
     @ManyToOne
-    @JoinColumn(name="screening_room_id")
+    @JoinColumn(name="screeningRoom_id")
     private ScreeningRoom screeningRoom;
 
     @OneToMany(mappedBy = "seat")
@@ -26,5 +26,11 @@ public class Seat {
     public Seat(int row, int number) {
         this.row = row;
         this.number = number;
+    }
+
+    public Seat(int row, int number, ScreeningRoom screeningRoom) {
+        this.row = row;
+        this.number = number;
+        this.screeningRoom = screeningRoom;
     }
 }

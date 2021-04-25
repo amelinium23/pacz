@@ -1,23 +1,24 @@
 package com.pacz.cinema.model.services;
 
-import com.pacz.cinema.exceptions.DuplicateException;
 import com.pacz.cinema.exceptions.ScreeningRoomNotFoundException;
 import com.pacz.cinema.model.entities.ScreeningRoom;
+import com.pacz.cinema.model.entities.Seat;
 import com.pacz.cinema.model.repositories.ScreeningRoomRepository;
-import com.pacz.cinema.model.repositories.SeatRepository;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ScreeningRoomService {
-    private ScreeningRoomRepository screeningRoomRepository;
-    private SeatRepository seatRepository;
+    private final ScreeningRoomRepository screeningRoomRepository;
 
-    public ScreeningRoomService(ScreeningRoomRepository screeningRoomRepository, SeatRepository seatRepository) {
+    public ScreeningRoomService(ScreeningRoomRepository screeningRoomRepository) {
         this.screeningRoomRepository = screeningRoomRepository;
-        this.seatRepository = seatRepository;
+    }
+
+    public ScreeningRoom getScreeningRoomById(Long id) {
+        return screeningRoomRepository.findById(id).orElseThrow(() -> new ScreeningRoomNotFoundException(id));
     }
 
     public ScreeningRoom getScreeningRoomByName(String name) {
@@ -29,19 +30,21 @@ public class ScreeningRoomService {
         return screeningRoomRepository.findAll();
     }
 
-    public ScreeningRoom createScreeningRoom(String name, int rows, int seatsInRow) throws DuplicateException {
-        try {
-            screeningRoomRepository.getScreeningRoomsByName(name);
-            throw new DuplicateException("Room with this name already exists");
-        } catch (ScreeningRoomNotFoundException e) {
-            return screeningRoomRepository.save(new ScreeningRoom(name, rows, seatsInRow));
+    public ScreeningRoom createScreeningRoom(String name, int rows, int seatsInRow) {
+        var screeningRoom = new ScreeningRoom(name, rows, seatsInRow);
+        var seats = new ArrayList<Seat>();
+        for (var i = 1; i <= screeningRoom.getRowNumber(); i++) {
+            for (var j = 1; j <= screeningRoom.getSeatsInRow(); j++) {
+                seats.add(new Seat(i, j, screeningRoom));
+            }
         }
+        screeningRoom.setSeats(seats);
+        screeningRoomRepository.save(screeningRoom);
+        return screeningRoom;
     }
 
-    public void deleteScreeningRoom(String name) {
-        try {
-            var screeningRoom = getScreeningRoomByName(name);
-            screeningRoomRepository.delete(screeningRoom);
-        } catch (ScreeningRoomNotFoundException ignored) {}
+    public void deleteScreeningRoom(Long id) {
+        var screeningRoom = screeningRoomRepository.findById(id);
+        screeningRoom.ifPresent(screeningRoomRepository::delete);
     }
 }
