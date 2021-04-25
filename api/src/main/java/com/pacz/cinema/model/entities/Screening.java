@@ -1,5 +1,7 @@
 package com.pacz.cinema.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -16,12 +18,15 @@ public class Screening {
     @Id
     @GeneratedValue
     private Long id;
+    @JsonFormat(pattern = "HH:mm")
     private LocalTime beginTime;
+    @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDate screeningDate;
     @ManyToOne
     @JoinColumn(name="film_id")
     private Film film;
     @OneToMany(mappedBy = "screening")
+    @JsonIgnore
     private List<SeatReservation> reservations = new ArrayList<>();
     @ManyToOne
     @JoinColumn(name="ScreeningRoom_id")

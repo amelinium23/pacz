@@ -1,5 +1,6 @@
 package com.pacz.cinema.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -20,8 +21,10 @@ public class ScreeningRoom {
     private int rowNumber;
     private int seatsInRow;
     @OneToMany(mappedBy = "screeningRoom", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Screening> screenings = new ArrayList<>();
     @OneToMany(mappedBy = "screeningRoom", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonIgnore
     private List<Seat> seats = new ArrayList<>();
 
     public ScreeningRoom(String name, int rowNumber, int seatsInRow) {

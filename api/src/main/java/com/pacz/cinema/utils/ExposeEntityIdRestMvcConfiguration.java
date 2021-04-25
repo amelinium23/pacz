@@ -16,7 +16,6 @@ public class ExposeEntityIdRestMvcConfiguration implements RepositoryRestConfigu
         config.exposeIdsFor(Normal.class);
         config.exposeIdsFor(Discounted.class);
         config.exposeIdsFor(ScreeningRoom.class);
-        config.exposeIdsFor(SeatReservation.class);
         config.exposeIdsFor(Screening.class);
     }
 }
