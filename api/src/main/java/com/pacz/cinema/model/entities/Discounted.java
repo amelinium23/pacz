@@ -9,24 +9,20 @@ import javax.persistence.Entity;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class Discounted extends Ticket {
-    private float discount;
+    private int discountPercent;
 
-    public void setDiscount(float discount) {
-        this.discount = discount;
-    }
-
-    public Discounted(float price, Screening screening, SeatReservation seat, float discount) {
+    public Discounted(float price, Screening screening, SeatReservation seat, int discountPercent) {
         super(price, screening, seat);
-        this.discount = discount;
+        this.discountPercent = discountPercent;
     }
 
     @Override
     public float calculatePrice() {
-        return discount * super.getBasePrice();
+        return 0.01f * discountPercent * super.getBasePrice();
     }
 
     @Override
     public String toString() {
-        return super.toString() + ", type=Discounted, discount=" + discount + '}';
+        return super.toString() + ", type=Discounted, discount=" + discountPercent + '}';
     }
 }

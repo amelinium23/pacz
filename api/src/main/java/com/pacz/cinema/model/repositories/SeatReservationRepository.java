@@ -10,6 +10,6 @@ import java.util.Optional;
 
 public interface SeatReservationRepository extends JpaRepository<SeatReservation, Long> {
     List<SeatReservation> getSeatReservationsByScreening(Screening screening);
-    Optional<SeatReservation> getSeatReservationBySeat(Seat seat);
+    Optional<SeatReservation> getSeatReservationBySeatAndScreening(Seat seat, Screening screening);
 }
 

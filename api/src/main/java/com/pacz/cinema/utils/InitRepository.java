@@ -15,9 +15,9 @@ public class InitRepository {
     @Bean
     CommandLineRunner init(TicketRepository ticketRepo, FilmRepository filmRepo,
                            ScreeningRepository screeningRepo, ScreeningRoomRepository roomRepo,
-                           SeatReservationRepository reservationRepo, SeatRepository seatRepo) {
+                           SeatReservationRepository reservationRepo) {
         var filmService = new FilmService(filmRepo);
-        var reservationService = new ReservationService(screeningRepo, seatRepo, reservationRepo);
+        var reservationService = new ReservationService(screeningRepo, reservationRepo);
         var screeningRoomService = new ScreeningRoomService(roomRepo);
         var screeningService = new ScreeningService(screeningRepo, roomRepo, filmRepo);
         var ticketService = new TicketService(ticketRepo, screeningRepo, reservationService);
