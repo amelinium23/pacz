@@ -17,6 +17,12 @@ const useStyles = makeStyles({
   },
   container: {
     display: "box",
+    alignContent: "center",
+    marginLeft: "10%",
+    marginTop: "2.5%",
+  },
+  cell: {
+    width: "250px",
   },
 });
 
@@ -37,7 +43,7 @@ export default function Screening() {
 
   return (
     <div>
-      <TableContainer component={Paper}>
+      <TableContainer className={classes.container} component={Paper}>
         <Table className={classes.Table}>
           <TableHead>
             <TableRow>
@@ -50,10 +56,16 @@ export default function Screening() {
           <TableBody>
             {screenings.map((i) => (
               <TableRow key={i.id}>
-                <TableCell align="right">{i.film.title}</TableCell>
-                <TableCell align="right">{i.screeningDate}</TableCell>
-                <TableCell align="right">{i.startTime}</TableCell>
-                <TableCell align="right">{i.screeningRoom.name}</TableCell>
+                <TableCell className={classes.cell}>{i.film.title}</TableCell>
+                <TableCell className={classes.cell} align="right">
+                  {i.screeningDate}
+                </TableCell>
+                <TableCell className={classes.cell} align="right">
+                  {i.startTime}
+                </TableCell>
+                <TableCell className={classes.cell} align="right">
+                  {i.screeningRoom.name}
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
