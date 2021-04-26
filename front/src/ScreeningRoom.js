@@ -26,7 +26,7 @@ const rows = [
   createData("9"),
 ];
 
-export default function Screening({ number }) {
+export default function ScreeningRoom({ number }) {
   const [edit, setEdit] = React.useState(false);
   const [colorButton, setColorButton] = React.useState(true);
 

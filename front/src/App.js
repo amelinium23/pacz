@@ -1,77 +1,40 @@
 import React from "react";
-import { Link, BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { Button } from "@material-ui/core";
+import { Route, Switch } from "react-router-dom";
 import Film from "./Film";
+import ScreeningRoom from "./ScreeningRoom";
+import AddFilm from "./AddFilm";
+import Drawer from "./components/Drawer";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles({
+  container: {
+    display: "flex",
+    flex: 3,
+  },
+});
 
 function App() {
+  const classes = useStyles();
   return (
-    // <div id="root">
-    //   <Router>
-    //     <Link to="/" style={{ textDecoration: "none" }}>
-    //       <header class="title">
-    //         <img
-    //           src="https://pics.freeicons.io/uploads/icons/png/18388217231595452842-512.png"
-    //           alt="logo"
-    //           width="100px"
-    //         />
-    //       </header>
-    //     </Link>
-    //     <Switch>
-    //       <Route path="/">
-    //         <Link to="/" style={{ textDecoration: "none" }}>
-    //           <ReserveButton />
-    //         </Link>
-    //       </Route>
-    //     </Switch>
-    //   </Router>
-    // </div>
-    // <Button
-    //   id="repertuar"
-    //   style={{
-    //     border: "2px solid #2E2E2E",
-    //     fontSize: "14px",
-    //     fontFamily: "Roboto",
-    //   }}
-    // >
-    //   Edytuj Repertuar
-    // </Button>
-    // <Button
-    //   id="reserve"
-    //   style={{
-    //     border: "2px solid #2E2E2E",
-    //     fontSize: "14px",
-    //     fontFamily: "Roboto",
-    //   }}
-    // >
-    //   Zarezerwuj miejsca
-    // </Button>
-    // <Screening number={1} />
-    <div>
-      <header id="header" class="title">
-        Zarządzanie filmami <br />
-        <Button
-          style={{
-            marginLeft: "10px",
-            border: "2px solid #2E2E2E",
-            backgroundColor: "white",
-            marginTop: "10px",
-          }}
-        >
-          Edytuj sale
-        </Button>
-        <Button
-          style={{
-            marginLeft: "10px",
-            border: "2px solid #2E2E2E",
-            backgroundColor: "white",
-            marginTop: "10px",
-          }}
-        >
-          Zarezerwuj miejsca
-        </Button>
-      </header>
-
-      <Film />
+    <div className={classes.container}>
+      <Drawer />
+      <Switch>
+        <Route exact from="/" render={(props) => <Film {...props} />} />
+        <Route
+          exact
+          from="/screenings"
+          render={(props) => <Film {...props} />}
+        />
+        <Route exact from="/films" render={(props) => <Film {...props} />} />
+        <Route
+          exact
+          from="/screeningRooms"
+          render={(props) => <ScreeningRoom {...props} />}
+        />
+        <Route exact from="/films" path="/films/add">
+          <AddFilm />
+        </Route>
+      </Switch>
     </div>
   );
 }
