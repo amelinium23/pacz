@@ -13,9 +13,15 @@ export default function Film() {
     setFilms(json);
   }
 
+  async function removeFilm(id) {
+    let response = await fetch(`http://localhost:8080/films/${id}`, {
+      method: "DELETE",
+    });
+  }
+
   useEffect(() => {
     requestsFilms();
-  }, [films]);
+  }, []);
 
   return (
     <div class="main">
@@ -44,6 +50,7 @@ export default function Film() {
       </header>
       {films.map((i) => (
         <Card
+          key={i.id}
           style={{
             width: "400px",
             textAlign: "center",
@@ -65,6 +72,7 @@ export default function Film() {
             Edytuj
           </Button>
           <Button
+            onClick={() => removeFilm(i.id)}
             style={{
               alignSelf: "center",
               backgroundColor: "white",
