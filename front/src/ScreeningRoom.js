@@ -32,7 +32,7 @@ export default function ScreeningRoom({ number }) {
 
   return (
     <div className="Screening">
-      <p class="Title">Sala nr.{number}</p>
+      <p className="Title">Sala nr.{number}</p>
       {edit ? (
         <Table
           id="s1"
@@ -175,6 +175,7 @@ export default function ScreeningRoom({ number }) {
                   />,
                   <Button
                     id="9"
+                    key={9}
                     style={
                       colorButton
                         ? { backgroundColor: "green" }
@@ -182,7 +183,7 @@ export default function ScreeningRoom({ number }) {
                     }
                     onClick={() => setColorButton(!colorButton)}
                   />,
-                ].map((i, index) => (
+                ].map((i) => (
                   <TableCell
                     style={{
                       border: "1px solid black",

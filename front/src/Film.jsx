@@ -14,9 +14,10 @@ export default function Film() {
   }
 
   async function removeFilm(id) {
-    let response = await fetch(`http://localhost:8080/films/${id}`, {
+    await fetch(`http://localhost:8080/films/${id}`, {
       method: "DELETE",
     });
+    films.filter((film) => film.id != id);
   }
 
   useEffect(() => {
@@ -24,7 +25,7 @@ export default function Film() {
   }, []);
 
   return (
-    <div class="main">
+    <div className="main">
       <header>
         <Link
           to="/films/add"
