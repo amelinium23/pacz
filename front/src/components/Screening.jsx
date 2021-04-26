@@ -7,34 +7,39 @@ import {
   TableContainer,
   TableBody,
   Paper,
+  Button,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import axios from "axios";
+import NewScreeningForm from "./NewScreeningForm.jsx";
 
 const useStyles = makeStyles({
   table: {
     width: "650px",
-    flex: 3,
   },
   container: {
-    display: "box",
-    alignContent: "center",
-    marginLeft: "10%",
-    marginTop: "2.5%",
+    display: "flex",
+    alignSelf: "center",
+    margin: "0% 25%",
   },
   cell: {
     width: "250px",
+  },
+  button: {
+    display: "flex",
+    alignItems: "center",
+    alignContent: "center",
   },
 });
 
 export default function Screening() {
   const classes = useStyles();
-  const [screenings, setScreening] = React.useState([]);
+  const [screenings, setScreenings] = React.useState([]);
+  const [formOpen, setFormOpen] = React.useState(false);
 
   async function requestScreening() {
-    const res = await fetch(`http://localhost:8080/screenings`);
-    const json = await res.json();
-    console.log(json);
-    setScreening(json);
+    const res = await axios.get(`http://localhost:8080/screenings`);
+    setScreenings(res.data);
   }
 
   React.useEffect(() => {
@@ -43,6 +48,13 @@ export default function Screening() {
 
   return (
     <div>
+      <Button
+        className={classes.button}
+        color="primary"
+        onClick={() => setFormOpen(!formOpen)}
+      >
+        Zaplanuj seans
+      </Button>
       <TableContainer className={classes.container} component={Paper}>
         <Table className={classes.Table}>
           <TableHead>
@@ -71,6 +83,13 @@ export default function Screening() {
           </TableBody>
         </Table>
       </TableContainer>
+      <NewScreeningForm
+        open={formOpen}
+        setOpen={setFormOpen}
+        newScreeningHandler={(newScreening) =>
+          setScreenings([...screenings, newScreening])
+        }
+      />
     </div>
   );
 }

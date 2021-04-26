@@ -1,8 +1,7 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-import Film from "./Film.jsx";
 import ScreeningRoom from "./ScreeningRoom";
-import AddFilm from "./AddFilm";
+import FilmScreen from "./components/FilmScreen.jsx";
 import Drawer from "./components/Drawer.jsx";
 import { makeStyles } from "@material-ui/core/styles";
 import Screening from "./components/Screening.jsx";
@@ -10,7 +9,6 @@ import Screening from "./components/Screening.jsx";
 const useStyles = makeStyles({
   container: {
     display: "flex",
-    flex: 3,
   },
 });
 
@@ -20,20 +18,24 @@ function App() {
     <div className={classes.container}>
       <Drawer />
       <Switch>
-        <Route exact from="/" render={(props) => <Film {...props} />} />
+        <Route exact from="/" render={(props) => <FilmScreen {...props} />} />
         <Route
           exact
           from="/screenings"
           render={(props) => <Screening {...props} />}
         />
-        <Route exact from="/films" render={(props) => <Film {...props} />} />
+        <Route
+          exact
+          from="/films"
+          render={(props) => <FilmScreen {...props} />}
+        />
         <Route
           exact
           from="/screeningRooms"
           render={(props) => <ScreeningRoom {...props} />}
         />
         <Route exact from="/films" path="/films/add">
-          <AddFilm />
+          <FilmScreen />
         </Route>
       </Switch>
     </div>
