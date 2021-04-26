@@ -4,6 +4,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -19,6 +20,11 @@ public class Discounted extends Ticket {
     @Override
     public float calculatePrice() {
         return 0.01f * discountPercent * super.getBasePrice();
+    }
+
+    @Override
+    public List<SeatReservation> getReservedSeats() {
+        return List.of(seat);
     }
 
     @Override

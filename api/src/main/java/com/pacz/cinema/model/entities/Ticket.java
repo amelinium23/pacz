@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Inheritance
@@ -18,9 +19,10 @@ public abstract class Ticket {
     @ManyToOne
     private Screening screening;
     @OneToOne
-    private SeatReservation seat;
+    protected SeatReservation seat;
 
     public abstract float calculatePrice();
+    public abstract List<SeatReservation> getReservedSeats();
 
     protected Ticket(float basePrice, Screening screening, SeatReservation seat) {
         this.basePrice = basePrice;

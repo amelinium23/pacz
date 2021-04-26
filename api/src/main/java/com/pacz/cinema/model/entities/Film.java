@@ -1,6 +1,5 @@
 package com.pacz.cinema.model.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import lombok.NoArgsConstructor;
@@ -26,6 +25,5 @@ public class Film {
     }
 
     @OneToMany(mappedBy = "film", cascade = CascadeType.ALL)
-    @JsonIgnore
     private List<Screening> screenings = new ArrayList<>();
 }

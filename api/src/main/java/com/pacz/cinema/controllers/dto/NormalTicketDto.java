@@ -1,11 +1,13 @@
-package com.pacz.cinema.controllers.requestbody;
+package com.pacz.cinema.controllers.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @NoArgsConstructor
 @Getter
-public class NormalTicketForm extends TicketForm {
+@Setter
+public class NormalTicketDto extends TicketDto {
     private int row;
     private int seat;
 }

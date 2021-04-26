@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @NoArgsConstructor
@@ -29,5 +30,10 @@ public class Group extends Ticket {
             return 0.85f * super.getBasePrice() * numberOfPeople;
         }
         return  numberOfPeople * super.getBasePrice();
+    }
+
+    @Override
+    public List<SeatReservation> getReservedSeats() {
+        return seats;
     }
 }

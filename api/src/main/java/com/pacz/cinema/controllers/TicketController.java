@@ -1,40 +1,43 @@
 package com.pacz.cinema.controllers;
 
-import com.pacz.cinema.controllers.requestbody.DiscountedTicketForm;
-import com.pacz.cinema.controllers.requestbody.GroupTicketForm;
-import com.pacz.cinema.controllers.requestbody.NormalTicketForm;
+import com.pacz.cinema.controllers.dto.*;
 import com.pacz.cinema.exceptions.DuplicateException;
 import com.pacz.cinema.exceptions.ScreeningNotFoundException;
 import com.pacz.cinema.model.entities.Ticket;
 import com.pacz.cinema.model.services.TicketService;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 public class TicketController {
     private final TicketService ticketService;
+    private final ModelMapper modelMapper;
 
-    public TicketController(TicketService ticketService) {
+    public TicketController(TicketService ticketService, ModelMapper modelMapper) {
         this.ticketService = ticketService;
+        this.modelMapper = modelMapper;
     }
 
     @GetMapping("/tickets")
-    public ResponseEntity<List<Ticket>> getTicketsForScreening(@RequestParam Long screeningId) {
+    public ResponseEntity<List<TicketDto>> getTicketsForScreening(@RequestParam Long screeningId) {
         try {
-            return ResponseEntity.ok(ticketService.getTicketsForScreening(screeningId));
+            return ResponseEntity.ok(ticketService.getTicketsForScreening(screeningId)
+                    .stream().map(this::convertToDto).collect(Collectors.toList()));
         } catch (ScreeningNotFoundException e) {
             return ResponseEntity.notFound().build();
         }
     }
 
     @PostMapping("/tickets/normal")
-    public ResponseEntity<Ticket> createNormalTicket(@RequestBody NormalTicketForm data) {
+    public ResponseEntity<TicketDto> createNormalTicket(@RequestBody NormalTicketDto data) {
         try {
-            return ResponseEntity.ok(ticketService.createNormalTicket(data.getBasePrice(), data.getScreeningId(),
-                    data.getRow(), data.getSeat()));
+            return ResponseEntity.ok(convertToDto(ticketService.createNormalTicket(data.getPrice(), data.getScreeningId(),
+                    data.getRow(), data.getSeat())));
         } catch (ScreeningNotFoundException e) {
             return ResponseEntity.notFound().build();
         } catch (DuplicateException e) {
@@ -43,10 +46,10 @@ public class TicketController {
     }
 
     @PostMapping("/tickets/group")
-    public ResponseEntity<Ticket> createGroupTicket(@RequestBody GroupTicketForm data) {
+    public ResponseEntity<TicketDto> createGroupTicket(@RequestBody GroupTicketDto data) {
         try {
-            return ResponseEntity.ok(ticketService.createGroupTicket(data.getBasePrice(), data.getSeats().size(),
-                    data.getSeats(), data.getScreeningId()));
+            return ResponseEntity.ok(convertToDto(ticketService.createGroupTicket(data.getPrice(), data.getSeats().size(),
+                    data.getSeats(), data.getScreeningId())));
         } catch (ScreeningNotFoundException e) {
             return ResponseEntity.notFound().build();
         } catch (DuplicateException e) {
@@ -55,15 +58,24 @@ public class TicketController {
     }
 
     @PostMapping("/tickets/discounted")
-    public ResponseEntity<Ticket> createDiscountedTicket(@RequestBody DiscountedTicketForm data) {
+    public ResponseEntity<TicketDto> createDiscountedTicket(@RequestBody DiscountedTicketDto data) {
         try {
-            return ResponseEntity.ok(ticketService.createDiscountedTicket(data.getBasePrice(), data.getDiscount(),
-                    data.getScreeningId(), data.getRow(), data.getSeat()));
+            return ResponseEntity.ok(convertToDto(ticketService.createDiscountedTicket(data.getPrice(), data.getDiscount(),
+                    data.getScreeningId(), data.getRow(), data.getSeat())));
         } catch (ScreeningNotFoundException e) {
             return ResponseEntity.notFound().build();
         } catch (DuplicateException e) {
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
+    }
+
+    private TicketDto convertToDto(Ticket ticket) {
+        var ticketDto = modelMapper.map(ticket, TicketDto.class);
+        ticketDto.setPrice(ticket.calculatePrice());
+        ticketDto.setReservedSeats(ticket.getReservedSeats()
+                .stream().map(seat -> modelMapper.map(seat, SeatReservationDto.class))
+                .collect(Collectors.toList()));
+        return ticketDto;
     }
 
 

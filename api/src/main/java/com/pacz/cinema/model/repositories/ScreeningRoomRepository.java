@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
 public interface ScreeningRoomRepository extends JpaRepository<ScreeningRoom, Long> {
-    public Optional<ScreeningRoom> getScreeningRoomsByName(String name);
+    Optional<ScreeningRoom> getScreeningRoomsByName(String name);
 }
 

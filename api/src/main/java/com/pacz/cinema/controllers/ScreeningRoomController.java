@@ -1,32 +1,37 @@
 package com.pacz.cinema.controllers;
 
-import com.pacz.cinema.controllers.requestbody.ScreeningRoomForm;
+import com.pacz.cinema.controllers.dto.ScreeningRoomDto;
 import com.pacz.cinema.exceptions.ScreeningRoomNotFoundException;
 import com.pacz.cinema.model.entities.ScreeningRoom;
 import com.pacz.cinema.model.services.ScreeningRoomService;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 public class ScreeningRoomController {
     private final ScreeningRoomService screeningRoomService;
+    private final ModelMapper modelMapper;
 
-    public ScreeningRoomController(ScreeningRoomService screeningRoomService) {
+    public ScreeningRoomController(ScreeningRoomService screeningRoomService, ModelMapper modelMapper) {
         this.screeningRoomService = screeningRoomService;
+        this.modelMapper = modelMapper;
     }
 
     @GetMapping("/screeningRooms")
-    public List<ScreeningRoom> getScreeningRooms() {
-        return screeningRoomService.getScreeningRooms();
+    public List<ScreeningRoomDto> getScreeningRooms() {
+        return screeningRoomService.getScreeningRooms()
+                .stream().map(this::convertToDto).collect(Collectors.toList());
     }
 
     @PostMapping("/screeningRooms")
-    public ResponseEntity<ScreeningRoom> createScreeningRoom(@RequestBody ScreeningRoomForm data) {
+    public ResponseEntity<ScreeningRoomDto> createScreeningRoom(@RequestBody ScreeningRoomDto data) {
         try {
-            return new ResponseEntity<>(screeningRoomService.createScreeningRoom(data.getName(), data.getRows(), data.getSeatsInRow())
+            return new ResponseEntity<>(convertToDto(screeningRoomService.createScreeningRoom(data.getName(), data.getRowNumber(), data.getSeatsInRow()))
                     , HttpStatus.CREATED);
         } catch (Exception e) {
             return ResponseEntity.badRequest().build();
@@ -34,9 +39,9 @@ public class ScreeningRoomController {
     }
 
     @GetMapping("/screeningRooms/{roomId}")
-    public ResponseEntity<ScreeningRoom> getScreeningRoomById(@PathVariable Long roomId) {
+    public ResponseEntity<ScreeningRoomDto> getScreeningRoomById(@PathVariable Long roomId) {
         try {
-            return ResponseEntity.ok(screeningRoomService.getScreeningRoomById(roomId));
+            return ResponseEntity.ok(convertToDto(screeningRoomService.getScreeningRoomById(roomId)));
         } catch (ScreeningRoomNotFoundException e) {
             return ResponseEntity.notFound().build();
         }
@@ -47,5 +52,8 @@ public class ScreeningRoomController {
         screeningRoomService.deleteScreeningRoom(roomId);
     }
 
+    private ScreeningRoomDto convertToDto(ScreeningRoom screeningRoom) {
+        return modelMapper.map(screeningRoom, ScreeningRoomDto.class);
+    }
 
 }

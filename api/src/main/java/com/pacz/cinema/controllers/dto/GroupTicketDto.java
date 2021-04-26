@@ -1,12 +1,14 @@
-package com.pacz.cinema.controllers.requestbody;
+package com.pacz.cinema.controllers.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.List;
 
 @NoArgsConstructor
 @Getter
-public class GroupTicketForm extends TicketForm {
+@Setter
+public class GroupTicketDto extends TicketDto {
     private List<int[]> seats;
 }
