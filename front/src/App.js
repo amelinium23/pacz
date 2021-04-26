@@ -5,6 +5,7 @@ import ScreeningRoom from "./ScreeningRoom";
 import AddFilm from "./AddFilm";
 import Drawer from "./components/Drawer.jsx";
 import { makeStyles } from "@material-ui/core/styles";
+import Screening from "./components/Screening.jsx";
 
 const useStyles = makeStyles({
   container: {
@@ -23,7 +24,7 @@ function App() {
         <Route
           exact
           from="/screenings"
-          render={(props) => <Film {...props} />}
+          render={(props) => <Screening {...props} />}
         />
         <Route exact from="/films" render={(props) => <Film {...props} />} />
         <Route
