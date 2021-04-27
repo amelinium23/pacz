@@ -15,9 +15,9 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2, 4, 3),
   },
   input: {
-    width: "580px",
-    marginBottom: "2%",
-    marginTop: "2%",
+    width: "100%",
+    marginBottom: "1%",
+    marginTop: "1.25%",
   },
   submit: {
     marginTop: "3%",
@@ -83,7 +83,6 @@ const NewScreeningForm = ({ open, setOpen, newScreeningHandler }) => {
             }}
             options={films}
             getOptionLabel={(option) => option.title}
-            style={{ width: 300 }}
             renderInput={(params) => (
               <TextField
                 className={classes.input}
@@ -103,7 +102,6 @@ const NewScreeningForm = ({ open, setOpen, newScreeningHandler }) => {
             }}
             options={screeningRooms}
             getOptionLabel={(option) => option.name}
-            style={{ width: 300 }}
             renderInput={(params) => (
               <TextField
                 className={classes.input}
