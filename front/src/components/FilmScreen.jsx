@@ -13,11 +13,34 @@ import FilmResults from "./FilmResults.jsx";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import FilmContext from "./FilmContext";
 
-const useStyles = makeStyles(() => ({
-  root: {
-    width: "90%",
+const useStyles = makeStyles({
+  input: {
+    width: "700px",
+    margin: "10px 1% 10px 1%",
   },
-}));
+  table: {
+    width: "900px",
+  },
+  container: {
+    marginLeft: "14%",
+    width: "100%",
+  },
+  cell: {
+    width: "300px",
+  },
+  button: {
+    alignItems: "center",
+    alignContent: "center",
+    width: "200px",
+    border: "1px solid black",
+    backgroundColor: "white",
+  },
+  submit: {
+    margin: "10px 1% 10px 1%",
+    width: "100%",
+    border: "1px solid black",
+  },
+});
 
 const FilmScreen = () => {
   const classes = useStyles();
@@ -45,8 +68,8 @@ const FilmScreen = () => {
   };
   return (
     <FilmContext.Provider value={filmState}>
-      <div className={classes.root}>
-        <Accordion expanded={isExpanded}>
+      <div>
+        <Accordion expanded={isExpanded} style={{ margin: "10px 25% 3% 18%" }}>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             onClick={() => setIsExpanded(!isExpanded)}
@@ -64,30 +87,30 @@ const FilmScreen = () => {
                 addFilm();
                 setIsExpanded(false);
               }}
-              className={classes.root}
             >
               <Input
+                className={classes.input}
                 name="title"
                 placeholder="Wpisz tytuł"
-                style={{
-                  width: "500px",
-                }}
                 onChange={(e) => updateTitle(e.target.value)}
                 required
               />{" "}
               <br />
               <Input
+                className={classes.input}
                 placeholder="Wpisz długość w minutach"
-                style={{
-                  width: "200px",
-                }}
                 type="number"
                 name="length"
                 onChange={(e) => updateLength(e.target.value)}
                 required
               />
               <br />
-              <Button type="submit" color="primary" fullWidth>
+              <Button
+                type="submit"
+                color="primary"
+                fullWidth
+                className={classes.submit}
+              >
                 Zatwierdź
               </Button>
             </form>
