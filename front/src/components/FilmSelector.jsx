@@ -1,0 +1,46 @@
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { TextField, makeStyles } from "@material-ui/core";
+import Autocomplete from "@material-ui/lab/Autocomplete";
+
+const useStyles = makeStyles(() => ({
+  input: {
+    width: "100%",
+    marginBottom: "1%",
+    marginTop: "1.25%",
+  },
+}));
+
+const FilmSelector = ({ setSelectedFilm }) => {
+  const classes = useStyles();
+  const [films, setFilms] = useState([]);
+  const requestData = async () => {
+    let json = await axios.get(`http://localhost:8080/films`);
+    setFilms(json.data);
+  };
+
+  useEffect(() => requestData(), []);
+
+  return (
+    <Autocomplete
+      id="film-selection"
+      onChange={(event, newValue) => {
+        setSelectedFilm(newValue);
+      }}
+      options={films}
+      getOptionLabel={(option) => option.title}
+      renderInput={(params) => (
+        <TextField
+          className={classes.input}
+          {...params}
+          label="Wybierz film"
+          variant="outlined"
+          required
+        />
+      )}
+      required
+    />
+  );
+};
+
+export default FilmSelector;

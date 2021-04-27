@@ -41,6 +41,9 @@ const useStyles = makeStyles({
     width: "100%",
     border: "1px solid black",
   },
+  filmForm: {
+    margin: "auto",
+  },
 });
 
 const FilmScreen = () => {
@@ -91,11 +94,15 @@ const FilmScreen = () => {
                   onSubmit={(e) => {
                     e.preventDefault();
                     addFilm();
+                    updateTitle("");
+                    updateLength(null);
                     setIsExpanded(false);
                   }}
+                  className={classes.filmForm}
                 >
                   <Input
                     className={classes.input}
+                    value={title}
                     name="title"
                     placeholder="Wpisz tytuł"
                     onChange={(e) => updateTitle(e.target.value)}
@@ -105,6 +112,7 @@ const FilmScreen = () => {
                   <Input
                     className={classes.input}
                     placeholder="Wpisz długość w minutach"
+                    value={length}
                     type="number"
                     name="length"
                     onChange={(e) => updateLength(e.target.value)}

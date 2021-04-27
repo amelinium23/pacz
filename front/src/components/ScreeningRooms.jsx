@@ -26,9 +26,12 @@ const useStyles = makeStyles({
   table: {
     width: "900px",
   },
-  container: {
-    marginLeft: "14%",
+  divcontainer: {
     width: "100%",
+  },
+  tablecontainer: {
+    width: "50%",
+    margin: "auto",
   },
   cell: {
     width: "300px",
@@ -78,8 +81,11 @@ export default function ScreeningRoom() {
 
   return (
     <ScreeningRoomContext.Provider value={screeningRoomState}>
-      <div>
-        <Accordion expanded={isExpanded} style={{ margin: "10px 10px 3% 30%" }}>
+      <div className={classes.divcontainer}>
+        <Accordion
+          expanded={isExpanded}
+          style={{ margin: "auto", width: "50%" }}
+        >
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             onClick={() => setIsExpanded(!isExpanded)}
@@ -135,7 +141,7 @@ export default function ScreeningRoom() {
             </form>
           </AccordionDetails>
         </Accordion>
-        <TableContainer className={classes.container} component={Paper}>
+        <TableContainer className={classes.tablecontainer} component={Paper}>
           <Table className={classes.table}>
             <TableHead>
               <TableRow>
