@@ -5,6 +5,8 @@ import Drawer from "./components/Drawer.jsx";
 import { makeStyles } from "@material-ui/core/styles";
 import Screening from "./components/Screening.jsx";
 import ScreeningRoom from "./components/ScreeningRooms.jsx";
+import TicketList from "./components/TicketList.jsx";
+import NewTicket from "./components/NewTicket.jsx";
 
 const useStyles = makeStyles({
   container: {
@@ -18,7 +20,12 @@ function App() {
     <div className={classes.container}>
       <Drawer />
       <Switch>
-        <Route exact from="/" render={(props) => <FilmScreen {...props} />} />
+        <Route exact from="/" render={(props) => <TicketList {...props} />} />
+        <Route
+          exact
+          from="/newTicket"
+          render={(props) => <NewTicket {...props} />}
+        />
         <Route
           exact
           from="/screenings"

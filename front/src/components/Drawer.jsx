@@ -19,8 +19,12 @@ const Drawer = ({ history }) => {
   const classes = useStyles();
   const itemsList = [
     {
-      text: "Bilety",
+      text: "Lista biletów",
       onClick: () => history.push("/"),
+    },
+    {
+      text: "Sprzedaż biletów",
+      onClick: () => history.push("/newTicket"),
     },
     {
       text: "Seanse",

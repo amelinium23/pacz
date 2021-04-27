@@ -19,7 +19,7 @@ public class Discounted extends Ticket {
 
     @Override
     public float calculatePrice() {
-        return 0.01f * discountPercent * super.getBasePrice();
+        return super.getBasePrice() - (0.01f * discountPercent * super.getBasePrice());
     }
 
     @Override
