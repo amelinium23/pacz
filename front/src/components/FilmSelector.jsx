@@ -24,10 +24,12 @@ const FilmSelector = ({ setSelectedFilm }) => {
   return (
     <Autocomplete
       id="film-selection"
+      disableClearable
       onChange={(event, newValue) => {
         setSelectedFilm(newValue);
       }}
       options={films}
+      getOptionSelected={(option, value) => option.id === value.id}
       getOptionLabel={(option) => option.title}
       renderInput={(params) => (
         <TextField

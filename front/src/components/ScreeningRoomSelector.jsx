@@ -29,6 +29,7 @@ const ScreeningRoomSelector = ({ setSelectedScreeningRoom }) => {
         setSelectedScreeningRoom(newValue);
       }}
       options={screeningRooms}
+      getOptionSelected={(option, value) => option.id === value.id}
       getOptionLabel={(option) => option.name}
       renderInput={(params) => (
         <TextField
