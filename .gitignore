@@ -2,3 +2,5 @@
 /.idea
 /view/view.iml
 /api/api.iml
+view/target/**
+PACZ.iml
