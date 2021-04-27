@@ -1,5 +1,4 @@
 @startuml classDiagram
-left to right direction
 class Discounted {
     -int discountPercent
     +Discounted(float price, Screening screening, SeatReservation seat, int discountPercent)
@@ -76,6 +75,9 @@ abstract class Ticket {
     ~Ticket(float basePrice, Screening screening, SeatReservation seat)
     +toString()
 }
+Ticket --|> Normal
+Ticket --|> Group
+Ticket --|> Discounted
 
 interface FilmRepository 
 interface ScreeningRepository
