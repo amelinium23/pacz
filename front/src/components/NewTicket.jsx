@@ -58,6 +58,7 @@ const NewTicket = () => {
       console.log(selectedSeats);
     };
     requestScreenings();
+    //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedFilm]);
 
   return (
