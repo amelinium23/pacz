@@ -14,6 +14,16 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
     padding: theme.spacing(2, 4, 3),
   },
+  input: {
+    width: "580px",
+    marginBottom: "2%",
+    marginTop: "2%",
+  },
+  submit: {
+    marginTop: "3%",
+    width: "100%",
+    border: "1px solid black",
+  },
 }));
 
 const NewScreeningForm = ({ open, setOpen, newScreeningHandler }) => {
@@ -76,6 +86,7 @@ const NewScreeningForm = ({ open, setOpen, newScreeningHandler }) => {
             style={{ width: 300 }}
             renderInput={(params) => (
               <TextField
+                className={classes.input}
                 {...params}
                 label="Wybierz film"
                 variant="outlined"
@@ -95,6 +106,7 @@ const NewScreeningForm = ({ open, setOpen, newScreeningHandler }) => {
             style={{ width: 300 }}
             renderInput={(params) => (
               <TextField
+                className={classes.input}
                 {...params}
                 label="Wybierz salę"
                 variant="outlined"
@@ -103,6 +115,7 @@ const NewScreeningForm = ({ open, setOpen, newScreeningHandler }) => {
             )}
           />
           <KeyboardDatePicker
+            className={classes.input}
             clearable="true"
             variant="inline"
             value={selectedDate}
@@ -110,8 +123,10 @@ const NewScreeningForm = ({ open, setOpen, newScreeningHandler }) => {
             onChange={(date) => handleDateChange(date)}
             minDate={new Date()}
             format="yyyy-MM-dd"
-          />
+          />{" "}
+          <br />
           <KeyboardTimePicker
+            className={classes.input}
             ampm={false}
             variant="inline"
             label="Godzina seansu"
@@ -119,7 +134,6 @@ const NewScreeningForm = ({ open, setOpen, newScreeningHandler }) => {
             onChange={handleDateChange}
             minutesStep={5}
           />
-
           <Button type="submit" color="primary" fullWidth>
             Zatwierdź
           </Button>

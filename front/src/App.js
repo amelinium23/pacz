@@ -1,10 +1,10 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-import ScreeningRoom from "./ScreeningRoom";
 import FilmScreen from "./components/FilmScreen.jsx";
 import Drawer from "./components/Drawer.jsx";
 import { makeStyles } from "@material-ui/core/styles";
 import Screening from "./components/Screening.jsx";
+import ScreeningRoom from "./components/ScreeningRooms.jsx";
 
 const useStyles = makeStyles({
   container: {

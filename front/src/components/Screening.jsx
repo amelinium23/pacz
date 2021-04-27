@@ -20,7 +20,7 @@ const useStyles = makeStyles({
   container: {
     display: "flex",
     alignSelf: "center",
-    margin: "0% 25%",
+    margin: "0% 10%",
   },
   cell: {
     width: "250px",
@@ -29,6 +29,10 @@ const useStyles = makeStyles({
     display: "flex",
     alignItems: "center",
     alignContent: "center",
+    margin: "10px 10px 10px 50%",
+    width: "200px",
+    border: "1px solid black",
+    backgroundColor: "white",
   },
 });
 

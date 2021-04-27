@@ -15,7 +15,7 @@ import FilmContext from "./FilmContext";
 
 const useStyles = makeStyles(() => ({
   root: {
-    width: "100%",
+    width: "90%",
   },
 }));
 
@@ -52,6 +52,7 @@ const FilmScreen = () => {
             onClick={() => setIsExpanded(!isExpanded)}
             aria-controls="panel1a-content"
             id="panel1a-header"
+            style={{ margin: "10px 10px 0 0px" }}
           >
             <Typography>Dodaj film</Typography>
           </AccordionSummary>
@@ -69,7 +70,7 @@ const FilmScreen = () => {
                 name="title"
                 placeholder="Wpisz tytuł"
                 style={{
-                  width: "100%",
+                  width: "500px",
                 }}
                 onChange={(e) => updateTitle(e.target.value)}
                 required

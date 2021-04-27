@@ -18,6 +18,7 @@ const FilmInfo = ({ id, title, length }) => {
         textAlign: "center",
         padding: "10px",
         border: "1px solid black",
+        margin: "20px 0 0 20px",
       }}
     >
       <p>Tytuł: {title}</p>
