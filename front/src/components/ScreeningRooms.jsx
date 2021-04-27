@@ -24,7 +24,7 @@ const useStyles = makeStyles({
     width: "580px",
   },
   table: {
-    width: "900px",
+    width: "100%",
   },
   divcontainer: {
     width: "100%",
