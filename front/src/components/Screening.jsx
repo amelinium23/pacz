@@ -14,13 +14,16 @@ import axios from "axios";
 import NewScreeningForm from "./NewScreeningForm.jsx";
 
 const useStyles = makeStyles({
+  root: {
+    width: "50%",
+    margin: "auto",
+  },
   table: {
     width: "650px",
   },
   container: {
     display: "flex",
     alignSelf: "center",
-    margin: "0% 10%",
   },
   cell: {
     width: "250px",
@@ -29,8 +32,8 @@ const useStyles = makeStyles({
     display: "flex",
     alignItems: "center",
     alignContent: "center",
-    margin: "10px 10px 10px 50%",
     width: "200px",
+    margin: "10px auto",
     border: "1px solid black",
     backgroundColor: "white",
   },
@@ -51,7 +54,7 @@ export default function Screening() {
   }, []);
 
   return (
-    <div>
+    <div className={classes.root}>
       <Button
         className={classes.button}
         color="primary"
