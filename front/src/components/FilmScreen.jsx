@@ -6,6 +6,7 @@ import {
   makeStyles,
   Typography,
   Button,
+  Grid,
 } from "@material-ui/core";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
@@ -68,55 +69,62 @@ const FilmScreen = () => {
   };
   return (
     <FilmContext.Provider value={filmState}>
-      <div>
-        <Accordion expanded={isExpanded} style={{ margin: "10px 25% 3% 18%" }}>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            onClick={() => setIsExpanded(!isExpanded)}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-            style={{ margin: "10px 10px 0 0px" }}
-          >
-            <Typography>Dodaj film</Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <form
-              id="addFilm"
-              onSubmit={(e) => {
-                e.preventDefault();
-                addFilm();
-                setIsExpanded(false);
-              }}
+      <div style={{ width: "100%" }}>
+        <Grid container spacing={3}>
+          <Grid item xs={12}>
+            <Accordion
+              expanded={isExpanded}
+              style={{ margin: "auto", width: "50%" }}
             >
-              <Input
-                className={classes.input}
-                name="title"
-                placeholder="Wpisz tytuł"
-                onChange={(e) => updateTitle(e.target.value)}
-                required
-              />{" "}
-              <br />
-              <Input
-                className={classes.input}
-                placeholder="Wpisz długość w minutach"
-                type="number"
-                name="length"
-                onChange={(e) => updateLength(e.target.value)}
-                required
-              />
-              <br />
-              <Button
-                type="submit"
-                color="primary"
-                fullWidth
-                className={classes.submit}
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                onClick={() => setIsExpanded(!isExpanded)}
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+                style={{ margin: "10px 10px 0 0px" }}
               >
-                Zatwierdź
-              </Button>
-            </form>
-          </AccordionDetails>
-        </Accordion>
-        <FilmResults />
+                <Typography>Dodaj film</Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <form
+                  id="addFilm"
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    addFilm();
+                    setIsExpanded(false);
+                  }}
+                >
+                  <Input
+                    className={classes.input}
+                    name="title"
+                    placeholder="Wpisz tytuł"
+                    onChange={(e) => updateTitle(e.target.value)}
+                    required
+                  />{" "}
+                  <br />
+                  <Input
+                    className={classes.input}
+                    placeholder="Wpisz długość w minutach"
+                    type="number"
+                    name="length"
+                    onChange={(e) => updateLength(e.target.value)}
+                    required
+                  />
+                  <br />
+                  <Button
+                    type="submit"
+                    color="primary"
+                    fullWidth
+                    className={classes.submit}
+                  >
+                    Zatwierdź
+                  </Button>
+                </form>
+              </AccordionDetails>
+            </Accordion>
+          </Grid>
+          <FilmResults />
+        </Grid>
       </div>
     </FilmContext.Provider>
   );

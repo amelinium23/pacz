@@ -2,31 +2,18 @@ import FilmInfo from "./FilmInfo.jsx";
 import "../films.css";
 import { useContext } from "react";
 import FilmContext from "./FilmContext";
-import { makeStyles } from "@material-ui/core";
-
-const useStyles = makeStyles(() => ({
-  films: {
-    width: "100%",
-    display: "flex",
-    flexWrap: "wrap",
-  },
-}));
+import { Grid } from "@material-ui/core";
 
 const FilmResults = () => {
-  const classes = useStyles();
   const [films] = useContext(FilmContext);
   return (
-    <div className={classes.films}>
+    <Grid container>
       {films.map((i) => (
-        <FilmInfo
-          key={i.id}
-          id={i.id}
-          title={i.title}
-          length={i.length}
-          sty
-        ></FilmInfo>
+        <Grid item xs={3} key={i.id}>
+          <FilmInfo id={i.id} title={i.title} length={i.length} />
+        </Grid>
       ))}
-    </div>
+    </Grid>
   );
 };
 
