@@ -1,4 +1,5 @@
 @startuml classDiagram
+left to right direction
 class Discounted {
     -int discountPercent
     +Discounted(float price, Screening screening, SeatReservation seat, int discountPercent)
@@ -160,6 +161,7 @@ class ScreeeningRoomController {
     -final ModelMapper modelMapper
     +ScreeningRoomController(ScreeningRoomService screeningRoomService, ModelMapper modelMapper)
 }
+
 class TicketController {
     -final TicketService ticketService;
     -final ModelMapper modelMapper;
