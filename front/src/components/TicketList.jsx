@@ -74,12 +74,15 @@ const TicketList = () => {
           setSelectedScreening(newValue);
         }}
         options={screenings}
-        getOptionLabel={(option) => option.screeningDate}
+        getOptionLabel={(option) =>
+          `${option.film.title} - ${option.screeningDate} - ${option.startTime}`
+        }
+        getOptionSelected={(option, value) => option.id === value.id}
         renderInput={(params) => (
           <TextField
             className={classes.input}
             {...params}
-            label="Wybierz datę seansu"
+            label="Wybierz seans"
             variant="outlined"
             required
           />
