@@ -54,14 +54,12 @@ const FilmScreen = () => {
   const filmState = useState([]);
   const [films, setFilms] = filmState; // I don't like it, but oh well
   useEffect(() => {
+    const requestFilms = async () => {
+      const json = await axios.get(`http://localhost:8080/films`);
+      setFilms(json.data);
+    };
     requestFilms();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const requestFilms = async () => {
-    const json = await axios.get(`http://localhost:8080/films`);
-    setFilms(json.data);
-  };
+  }, [setFilms]);
 
   const addFilm = async () => {
     const res = await axios.post("http://localhost:8080/films", {
@@ -72,7 +70,7 @@ const FilmScreen = () => {
   };
   return (
     <FilmContext.Provider value={filmState}>
-      <div style={{ width: "100%" }}>
+      <div style={{ width: "100%", marginLeft: "6%" }}>
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <Accordion

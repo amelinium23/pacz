@@ -38,9 +38,16 @@ const SeatSelector = ({
   useEffect(() => {
     getReservations();
     setSelectedSeats([]);
+    // eslint-disable-next-line
   }, [screening]);
   return (
-    <div>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
+    >
       {[...Array(screeningRoom.rowNumber).keys()].map((i) => (
         <div key={`row${i + 1}`} style={{ display: "flex" }}>
           {[...Array(screeningRoom.seatsInRow).keys()].map((j) => (

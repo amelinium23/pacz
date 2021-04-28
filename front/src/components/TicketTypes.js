@@ -23,7 +23,7 @@ export const ticketTypes = [
         row: selectedSeats[0].row,
         seat: selectedSeats[0].seat,
       });
-      window.location.reload(false);
+      window.location.reload(false); // UGLY
     },
     allDataInserted: (selectedSeats, ticketBasePrice, selectedScreening) => {
       return selectedSeats && ticketBasePrice && selectedScreening;
