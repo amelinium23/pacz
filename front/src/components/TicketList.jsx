@@ -18,14 +18,16 @@ const useStyles = makeStyles({
     margin: "auto",
   },
   table: {
-    width: "650px",
+    marginRight: "30px",
+    marginTop: "10px",
+    width: "84.5%",
   },
   container: {
     display: "flex",
     alignSelf: "center",
   },
   cell: {
-    width: "250px",
+    width: "auto",
   },
   button: {
     display: "flex",
@@ -40,6 +42,7 @@ const useStyles = makeStyles({
 
 const TicketList = () => {
   const [screenings, updateScreenings] = useState([]);
+  const [tickets, updateTickets] = useState([]);
   const [selectedScreening, setSelectedScreening] = useState({});
   const classes = useStyles();
 
@@ -48,8 +51,19 @@ const TicketList = () => {
     updateScreenings(res.data);
   }
 
+  async function requestTickets(id) {
+    if (selectedScreening.id === id) {
+      const res = await axios.get(
+        `http://localhost:8080/tickets?screeningId=${selectedScreening.id}`
+      );
+      console.log(res.data);
+      updateTickets(res.data);
+    }
+  }
+
   useEffect(() => {
     requestScreening();
+    requestTickets(selectedScreening.id);
   }, [selectedScreening]);
 
   return (
@@ -57,7 +71,6 @@ const TicketList = () => {
       <AutoComplete
         id="screening-selection"
         onChange={(event, newValue) => {
-          console.log(newValue);
           setSelectedScreening(newValue);
         }}
         options={screenings}
@@ -66,7 +79,7 @@ const TicketList = () => {
           <TextField
             className={classes.input}
             {...params}
-            label="Wybierz seans"
+            label="Wybierz datę seansu"
             variant="outlined"
             required
           />
@@ -75,17 +88,23 @@ const TicketList = () => {
       <TableContainer className={classes.table} component={Paper}>
         <TableHead>
           <TableRow>
-            <TableCell>Bilety</TableCell>
-            <TableCell>Film</TableCell>
-            <TableCell>Data seansu</TableCell>
+            <TableCell>Ilość miejsc</TableCell>
+            <TableCell align="right">Cena</TableCell>
+            <TableCell align="right">Film</TableCell>
+            <TableCell align="right">Data seansu</TableCell>
+            <TableCell align="right">Godzina rozpoczęcia</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {
-            <TableRow>
-              <TableCell></TableCell>
+          {tickets.map((i) => (
+            <TableRow key={i.id}>
+              <TableCell>{i.reservedSeats.length}</TableCell>
+              <TableCell>{i.price.toFixed(2)} zł</TableCell>
+              <TableCell align="right">{i.screening.film.title}</TableCell>
+              <TableCell align="right">{i.screening.screeningDate}</TableCell>
+              <TableCell align="right">{i.screening.startTime}</TableCell>
             </TableRow>
-          }
+          ))}
         </TableBody>
       </TableContainer>
     </div>
