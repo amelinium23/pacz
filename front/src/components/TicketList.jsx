@@ -46,24 +46,32 @@ const TicketList = () => {
   const [selectedScreening, setSelectedScreening] = useState({});
   const classes = useStyles();
 
-  async function requestScreening() {
-    const res = await axios.get(`http://localhost:8080/screenings`);
-    updateScreenings(res.data);
-  }
-
-  async function requestTickets(id) {
-    if (selectedScreening.id === id) {
-      const res = await axios.get(
-        `http://localhost:8080/tickets?screeningId=${selectedScreening.id}`
-      );
-      console.log(res.data);
-      updateTickets(res.data);
-    }
-  }
-
   useEffect(() => {
-    requestScreening();
-    requestTickets(selectedScreening.id);
+    const requestScreenings = async () => {
+      try {
+        const res = await axios.get(`http://localhost:8080/screenings`);
+        updateScreenings(res.data);
+      } catch (err) {
+        alert("Błąd pobierania seansów");
+      }
+    };
+    requestScreenings();
+  }, []);
+  useEffect(() => {
+    const requestTickets = async () => {
+      try {
+        if (selectedScreening.id !== undefined) {
+          const res = await axios.get(
+            `http://localhost:8080/tickets?screeningId=${selectedScreening.id}`
+          );
+          console.log(res.data);
+          updateTickets(res.data);
+        }
+      } catch (err) {
+        alert("Błąd pobierania biletów");
+      }
+    };
+    requestTickets();
   }, [selectedScreening]);
 
   return (

@@ -15,8 +15,12 @@ const ScreeningRoomSelector = ({ setSelectedScreeningRoom }) => {
   const classes = useStyles();
   const [screeningRooms, setScreeningRooms] = useState([]);
   const requestData = async () => {
-    let json = await axios.get(`http://localhost:8080/screeningRooms`);
-    setScreeningRooms(json.data);
+    try {
+      let json = await axios.get(`http://localhost:8080/screeningRooms`);
+      setScreeningRooms(json.data);
+    } catch (err) {
+      alert("Błąd przy pobieraniu sal");
+    }
   };
 
   useEffect(() => requestData(), []);

@@ -34,13 +34,17 @@ const NewScreeningForm = ({ open, setOpen, newScreeningHandler }) => {
   const [selectedScreeningRoom, setSelectedScreeningRoom] = useState(null);
   const [selectedDate, handleDateChange] = useState(new Date());
   const addScreening = async () => {
-    const json = await axios.post(`http://localhost:8080/screenings`, {
-      filmId: selectedFilm.id,
-      screeningRoomId: selectedScreeningRoom.id,
-      startTime: format(selectedDate, "HH:mm"),
-      screeningDate: format(selectedDate, "yyyy-MM-dd"),
-    });
-    newScreeningHandler(json.data);
+    try {
+      const json = await axios.post(`http://localhost:8080/screenings`, {
+        filmId: selectedFilm.id,
+        screeningRoomId: selectedScreeningRoom.id,
+        startTime: format(selectedDate, "HH:mm"),
+        screeningDate: format(selectedDate, "yyyy-MM-dd"),
+      });
+      newScreeningHandler(json.data);
+    } catch (err) {
+      alert("Błąd przy dodawaniu seansu");
+    }
   };
 
   return (

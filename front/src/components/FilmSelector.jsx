@@ -15,8 +15,12 @@ const FilmSelector = ({ setSelectedFilm }) => {
   const classes = useStyles();
   const [films, setFilms] = useState([]);
   const requestData = async () => {
-    let json = await axios.get(`http://localhost:8080/films`);
-    setFilms(json.data);
+    try {
+      let json = await axios.get(`http://localhost:8080/films`);
+      setFilms(json.data);
+    } catch (err) {
+      alert("Błąd połączenia");
+    }
   };
 
   useEffect(() => requestData(), []);

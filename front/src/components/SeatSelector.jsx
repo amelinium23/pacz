@@ -26,11 +26,14 @@ const SeatSelector = ({
     }
   };
   const getReservations = async () => {
-    const json = await axios.get(
-      `http://localhost:8080/reservations?screeningId=${screening}`
-    );
-    setTakenSeats(json.data);
-    console.log(takenSeats);
+    try {
+      const json = await axios.get(
+        `http://localhost:8080/reservations?screeningId=${screening}`
+      );
+      setTakenSeats(json.data);
+    } catch (err) {
+      alert("Błąd przy pobieraniu rezerwacji");
+    }
   };
   useEffect(() => {
     setSelectedSeats([]);

@@ -55,18 +55,26 @@ const FilmScreen = () => {
   const [films, setFilms] = filmState; // I don't like it, but oh well
   useEffect(() => {
     const requestFilms = async () => {
-      const json = await axios.get(`http://localhost:8080/films`);
-      setFilms(json.data);
+      try {
+        const json = await axios.get(`http://localhost:8080/films`);
+        setFilms(json.data);
+      } catch (err) {
+        alert("Bład połączenia");
+      }
     };
     requestFilms();
   }, [setFilms]);
 
   const addFilm = async () => {
-    const res = await axios.post("http://localhost:8080/films", {
-      title: title,
-      length: length,
-    });
-    setFilms([...films, res.data]);
+    try {
+      const res = await axios.post("http://localhost:8080/films", {
+        title: title,
+        length: length,
+      });
+      setFilms([...films, res.data]);
+    } catch (err) {
+      alert("Błąd przy dodawaniu filmu");
+    }
   };
   return (
     <FilmContext.Provider value={filmState}>

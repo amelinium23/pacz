@@ -61,17 +61,25 @@ export default function ScreeningRoom() {
   const [screeningRooms, setScreeningRooms] = screeningRoomState;
 
   async function requestScreeningRooms() {
-    const res = await axios.get(`http://localhost:8080/screeningRooms`);
-    setScreeningRooms(res.data);
+    try {
+      const res = await axios.get(`http://localhost:8080/screeningRooms`);
+      setScreeningRooms(res.data);
+    } catch (err) {
+      alert("Błąd przy pobieraniu seansów");
+    }
   }
 
   const addScreeningRoom = async () => {
-    const res = await axios.post(`http://localhost:8080/screeningRooms`, {
-      name: name,
-      seatsInRow: seatsInRow,
-      rowNumber: rowNumber,
-    });
-    setScreeningRooms([...screeningRooms, res.data]);
+    try {
+      const res = await axios.post(`http://localhost:8080/screeningRooms`, {
+        name: name,
+        seatsInRow: seatsInRow,
+        rowNumber: rowNumber,
+      });
+      setScreeningRooms([...screeningRooms, res.data]);
+    } catch (err) {
+      alert("Błąd przy dodawaniu sali");
+    }
   };
 
   React.useEffect(() => {

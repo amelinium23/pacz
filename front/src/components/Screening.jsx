@@ -45,8 +45,12 @@ export default function Screening() {
   const [formOpen, setFormOpen] = React.useState(false);
 
   async function requestScreening() {
-    const res = await axios.get(`http://localhost:8080/screenings`);
-    setScreenings(res.data);
+    try {
+      const res = await axios.get(`http://localhost:8080/screenings`);
+      setScreenings(res.data);
+    } catch (err) {
+      alert("Błąd przy pobieraniu seansów");
+    }
   }
 
   React.useEffect(() => {
