@@ -1,0 +1,68 @@
+@startuml dto_diagram
+left to right direction
+package Dto {
+    class TicketDto {
+        -float IconPrivateColor
+        -Long screeningId
+        -ScreeningDto screening
+        -List<SeatReservationDto> reserverdSeats
+        +setPrice(float price)
+        +TicketDto(List<SeatReservationDto> reserverdSeats)
+    }
+
+    class SeatReservationDto {
+        -int seatRow
+        -int seatNumber
+    }
+
+    class ScreeningRoomDto {
+        -Long id
+        -String name
+        -int rowNumber
+        -int seatsInRow
+    }
+
+    class ScreeningDto {
+        -Long id
+        -Long screeningRoomId
+        -Long filmId
+        -FilmDto film
+        -ScreeningRoomDto screeningRoom
+        -String screeningDate
+        -String startTime
+        +setScreeningDate(LocalDate screeningDate)
+        +setStartTime(LocalTime startTime)
+    }
+
+    class NormalTicketDto {
+        -int row
+        -int seat
+    }
+    
+    class GroupTicketDto {
+        -List<int[]> seats
+    }
+
+    class FilmDto {
+        -Long id
+        -String title
+        -int length
+    }
+
+    class DiscountedTicketDto {
+        -int discount
+        -int row
+        -int seat
+    }
+
+    DiscountedTicketDto --|> TicketDto
+    GroupTicketDto --|> TicketDto
+    NormalTicketDto --|> TicketDto
+    ScreeningDto *--> TicketDto
+    ScreeningDto *--> ScreeningRoomDto
+    ScreeningDto *--> FilmDto
+    SeatReservationDto *--> TicketDto
+}
+
+
+@enduml
