@@ -1,5 +1,5 @@
 # System do zarządzania kinem
-## Backedn
+## Backend
 Za pomocą frameworku Spring zostało stworzone backend aplikacji. Obsługuje ono połączenie z bazą danych, jak i funkcjonalności takie jak:
 - dodawanie i usuwanie sal
 - tworzenie, wyświetlanie seansów
