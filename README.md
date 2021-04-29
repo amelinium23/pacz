@@ -8,3 +8,7 @@ Za pomocą frameworku Spring zostało stworzone backend aplikacji. Obsługuje on
 
 ## Frontend
 Stworzony w javascripcie przy pomocy ReactJS. Do stworzenia GUI użytkownika skorzystano z biblioteki Material-UI.
+
+## Autorzy
+- Piotr Tomczak - część frontend
+- Kacper Wiśniewski - części frontend i backend
