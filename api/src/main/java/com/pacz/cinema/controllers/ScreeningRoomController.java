@@ -47,10 +47,6 @@ public class ScreeningRoomController {
         }
     }
 
-    @DeleteMapping("/screeningRooms/{roomId}")
-    public void removeFilm(@PathVariable Long roomId) {
-        screeningRoomService.deleteScreeningRoom(roomId);
-    }
 
     private ScreeningRoomDto convertToDto(ScreeningRoom screeningRoom) {
         return modelMapper.map(screeningRoom, ScreeningRoomDto.class);

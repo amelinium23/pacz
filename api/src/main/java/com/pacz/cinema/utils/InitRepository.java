@@ -22,13 +22,13 @@ public class InitRepository {
         var screeningService = new ScreeningService(screeningRepo, roomRepo, filmRepo);
         var ticketService = new TicketService(ticketRepo, screeningRepo, reservationService);
         return args -> {
-            var pokuj = screeningRoomService.createScreeningRoom("Sala 1", 5, 5);
-            var film = filmService.createFilm("Najmanito the Movie", 200);
-            var premiera = screeningService.createScreening(LocalDate.now(), LocalTime.now(), film.getId(), pokuj.getId());
-            ticketService.createNormalTicket(15.40f, premiera.getId(), 1, 1);
+            var exampleScreeningRoom = screeningRoomService.createScreeningRoom("Sala 1", 5, 5);
+            var exampleFilm = filmService.createFilm("Najmanito the Movie", 200);
+            var exampleScreening = screeningService.createScreening(LocalDate.now(), LocalTime.now(), exampleFilm.getId(), exampleScreeningRoom.getId());
+            ticketService.createNormalTicket(15.40f, exampleScreening.getId(), 1, 1);
             var seats = List.of(new int[]{1, 2}, new int[]{1, 3},
             new int[]{1, 4}, new int[]{1, 5}, new int[]{2, 1}, new int[]{2, 2});
-            ticketService.createGroupTicket(15.40f, seats.size(), seats, premiera.getId());
+            ticketService.createGroupTicket(15.40f, seats.size(), seats, exampleScreening.getId());
         };
     }
 }

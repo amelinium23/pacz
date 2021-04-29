@@ -21,10 +21,6 @@ public class ScreeningRoomService {
         return screeningRoomRepository.findById(id).orElseThrow(() -> new ScreeningRoomNotFoundException(id));
     }
 
-    public ScreeningRoom getScreeningRoomByName(String name) {
-        return screeningRoomRepository.getScreeningRoomsByName(name)
-                .orElseThrow(() -> new ScreeningRoomNotFoundException(name));
-    }
 
     public List<ScreeningRoom> getScreeningRooms() {
         return screeningRoomRepository.findAll();
@@ -43,8 +39,4 @@ public class ScreeningRoomService {
         return screeningRoom;
     }
 
-    public void deleteScreeningRoom(Long id) {
-        var screeningRoom = screeningRoomRepository.findById(id);
-        screeningRoom.ifPresent(screeningRoomRepository::delete);
-    }
 }
