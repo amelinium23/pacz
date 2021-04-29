@@ -1,6 +1,5 @@
 @startuml classDiagram
-left to right direction
-
+' left to right direction
 package Entities {
     class Discounted {
         -int discountPercent
@@ -25,7 +24,6 @@ package Entities {
     }
 
     class Normal {
-        -List<SeatReservation> seats
         +Normal(float price, Screening screening, SeatReservation seat)
         +calculatePrice(): float
         +getReservationSeats()
@@ -81,7 +79,15 @@ package Entities {
     Ticket --|> Normal
     Ticket --|> Group
     Ticket --|> Discounted
+    Ticket *--> Screening
+    Ticket *--> SeatReservation
+    Screening *--> Film
+    Screening *--> ScreeningRoom
+    Seat *--> ScreeningRoom
+    SeatReservation *--> Screening
+    SeatReservation *--> Seat
 }
+
 
 
 package Repository {
@@ -90,8 +96,11 @@ package Repository {
     interface ScreeeningRoomRepository
     interface SeatRepositoryRepository
     interface SeatReservationRepository
-    interface TicketReposiotry
+    interface TicketRepository
 }
+
+Repository -> "Baza danych"
+
 
 package Service {
     class FilmService {
@@ -143,7 +152,9 @@ package Service {
         +Ticket createGroupTicket(float price, int numberOfPeople, List<int[]> seats, Long screeningId)
         +List<Ticket> getTicketsForScreening(Long screeningId)
     }
+    TicketService -> ReservationService : uses
 }
+
 
 package Controllers {
     class FilmController {
@@ -177,5 +188,8 @@ package Controllers {
         +TicketController(TicketService ticketService, ModelMapper modelMapper)
     }
 }
+Controllers -> Service : uses
+database "Baza danych" {
 
+}
 @enduml

@@ -1,0 +1,90 @@
+@startuml Nie wiem
+package Entities {
+    class Discounted {
+        -int discountPercent
+        +Discounted(float price, Screening screening, SeatReservation seat, int discountPercent)
+        +calculatePrice(): float
+        +getReservationSeats()
+    }
+
+    class Film {
+        -Long id
+        -String title
+        -int length
+        +Film(title: String, length: int)
+    }
+
+    class Group {
+        -int numberOfpeople
+        -List<SeatReservation> seats
+        +Group(float price, Screening screening, SeatReservation seat, int discountPercent)
+        +calculatePrice(): float
+        +getReservationSeats()
+    }
+
+    class Normal {
+        -List<SeatReservation> seats
+        +Normal(float price, Screening screening, SeatReservation seat)
+        +calculatePrice(): float
+        +getReservationSeats()
+    }
+
+    class Screening{
+        -Long id
+        -LocalTime startTime
+        -LocalDate screeningDate
+        -Film film
+        -ScreeningRoom screeningRoom
+        -List<SeatReservation> reservations
+        -List<Ticket> tickets;
+        +Screening(LocalTime startTime, LocalDate screeningDate, Film film, ScreeningRoom screeningRoom)
+    }
+
+    class ScreeningRoom{
+        -Long id
+        -String name
+        -int rowNumber
+        -int seatsInRow
+        -List<Screening> screenings
+        -List<Seat> seats
+        +ScreeningRoom(String name, int rowNumber, int seatsInRow)
+    }
+
+    class Seat {
+        -Long id
+        -int row
+        -int number
+        -ScreeningRoom screeningRoom
+        -List<SeatReservation> reservations
+        +Seat(int row, int number, ScreeningRoom screeningRoom)
+    }
+
+    class SeatReservation {
+        -Long id
+        -Seat seat
+        -Screening screening
+        +SeatReservation(Seat seat, Screening screening)
+    }
+
+    abstract class Ticket {
+        -Long id
+        -float basePrice
+        -Screening screening
+        -SeatReservation seat
+        +abstract calculatePrice()
+        +abstract List<SeatReservation> getReservedSeats();
+        ~Ticket(float basePrice, Screening screening, SeatReservation seat)
+        +toString()
+    }
+    Ticket --|> Normal
+    Ticket --|> Group
+    Ticket --|> Discounted
+    Ticket *--> Screening
+    Ticket *--> SeatReservation
+    Screening *--> Film
+    Screening *--> ScreeningRoom
+    Seat *--> ScreeningRoom
+    SeatReservation *--> Screening
+    SeatReservation *--> Seat
+}
+@enduml
