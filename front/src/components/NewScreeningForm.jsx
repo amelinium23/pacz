@@ -3,8 +3,8 @@ import axios from "axios";
 import { Modal, Button, makeStyles } from "@material-ui/core";
 import DateFnUtils from "@date-io/date-fns";
 import { format } from "date-fns";
-import FilmSelector from "./FilmSelector.jsx";
-import ScreeningRoomSelector from "./ScreeningRoomSelector.jsx";
+import FilmSelector from "../containers/FilmSelector.jsx";
+import ScreeningRoomSelector from "../containers/ScreeningRoomSelector.jsx";
 import {
   KeyboardDatePicker,
   MuiPickersUtilsProvider,
