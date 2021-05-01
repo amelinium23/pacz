@@ -10,7 +10,7 @@ import {
 } from "@material-ui/core";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import FilmResults from "./FilmResults.jsx";
+import FilmResults from "../containers/FilmResults.jsx";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import FilmContext from "../utils/FilmContext";
 
