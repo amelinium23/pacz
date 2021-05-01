@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import EventSeatIcon from "@material-ui/icons/EventSeat";
-import IconButton from "@material-ui/core/IconButton";
+import Seat from "../components/Seat.jsx";
 import axios from "axios";
 
 const SeatSelector = ({
@@ -35,6 +34,26 @@ const SeatSelector = ({
       alert("Błąd przy pobieraniu rezerwacji");
     }
   };
+  const isTaken = (row, seatNumber) => {
+    return takenSeats.find(
+      (seat) => seat.seatRow === row && seat.seatNumber === seatNumber
+    );
+  };
+  const assignColor = (row, seatNumber) => {
+    if (
+      takenSeats.find(
+        (seat) => seat.seatRow === row && seat.seatNumber === seatNumber
+      )
+    ) {
+      return "disabled";
+    } else if (
+      selectedSeats.find((seat) => seat.row === row && seat.seat === seatNumber)
+    ) {
+      return "primary";
+    } else {
+      return "secondary";
+    }
+  };
   useEffect(() => {
     setSelectedSeats([]);
   }, [seatCount, setSelectedSeats]);
@@ -54,32 +73,18 @@ const SeatSelector = ({
       {[...Array(screeningRoom.rowNumber).keys()].map((i) => (
         <div key={`row${i + 1}`} style={{ display: "flex" }}>
           {[...Array(screeningRoom.seatsInRow).keys()].map((j) => (
-            <IconButton
-              aria-label="seat"
+            <Seat
               key={`row${i + 1}-seat${j + 1}`}
-              onClick={() => {
-                handlePress(i + 1, j + 1);
+              takenSeats={takenSeats}
+              selectedSeats={selectedSeats}
+              handlePress={handlePress}
+              isTaken={isTaken(i + 1, j + 1)}
+              color={assignColor(i + 1, j + 1)}
+              seatInfo={{
+                row: i + 1,
+                seat: j + 1,
               }}
-              disabled={takenSeats.find(
-                (seat) => seat.seatRow === i + 1 && seat.seatNumber === j + 1
-              )}
-            >
-              <EventSeatIcon
-                style={{ fontSize: 80 }}
-                color={
-                  takenSeats.find(
-                    (seat) =>
-                      seat.seatRow === i + 1 && seat.seatNumber === j + 1
-                  )
-                    ? "disabled"
-                    : selectedSeats.find(
-                        (seat) => seat.row === i + 1 && seat.seat === j + 1
-                      )
-                    ? "primary"
-                    : "secondary"
-                }
-              />
-            </IconButton>
+            />
           ))}
         </div>
       ))}

@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Card, Button, makeStyles, Input } from "@material-ui/core";
-import FilmContext from "./FilmContext";
+import FilmContext from "../utils/FilmContext";
 import axios from "axios";
 
 const useStyles = makeStyles(() => ({

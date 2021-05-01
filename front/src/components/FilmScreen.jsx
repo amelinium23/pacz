@@ -12,7 +12,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import FilmResults from "./FilmResults.jsx";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import FilmContext from "./FilmContext";
+import FilmContext from "../utils/FilmContext";
 
 const useStyles = makeStyles({
   input: {

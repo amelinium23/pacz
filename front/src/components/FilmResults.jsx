@@ -1,7 +1,7 @@
 import FilmInfo from "./FilmInfo.jsx";
 import "../films.css";
 import { useContext } from "react";
-import FilmContext from "./FilmContext";
+import FilmContext from "../utils/FilmContext";
 import { Grid } from "@material-ui/core";
 
 const FilmResults = () => {

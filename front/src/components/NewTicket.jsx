@@ -3,8 +3,8 @@ import axios from "axios";
 import { Autocomplete } from "@material-ui/lab";
 import { TextField, Paper, Button } from "@material-ui/core";
 import FilmSelector from "./FilmSelector.jsx";
-import SeatSelector from "./SeatSelector.jsx";
-import { ticketTypes } from "./TicketTypes.js";
+import SeatSelector from "../containers/SeatSelector.jsx";
+import { ticketTypes } from "../utils/TicketTypes.js";
 
 const NewTicket = () => {
   const ticketBasePrice = 15.4;
