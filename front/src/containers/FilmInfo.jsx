@@ -42,7 +42,8 @@ const FilmInfo = ({ id, title, length }) => {
       title={title}
       newTitle={newTitle}
       setNewTitle={setNewTitle}
-      newRuntime={setNewRuntime}
+      newRuntime={newRuntime}
+      setNewRuntime={setNewRuntime}
       length={length}
       isEditing={isEditing}
       setIsEditing={setIsEditing}
