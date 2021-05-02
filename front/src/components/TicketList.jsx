@@ -1,34 +1,17 @@
 import React, { useState, useEffect } from "react";
-import {
-  TableRow,
-  TableCell,
-  TableHead,
-  TableContainer,
-  TableBody,
-  Paper,
-} from "@material-ui/core";
+
 import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
 import AutoComplete from "@material-ui/lab/Autocomplete";
 import { TextField } from "@material-ui/core";
+import TicketTable from "./TicketTable.jsx";
 
 const useStyles = makeStyles({
   root: {
     width: "50%",
     margin: "auto",
   },
-  table: {
-    marginRight: "30px",
-    marginTop: "10px",
-    width: "84.5%",
-  },
-  container: {
-    display: "flex",
-    alignSelf: "center",
-  },
-  cell: {
-    width: "auto",
-  },
+
   button: {
     display: "flex",
     alignItems: "center",
@@ -96,28 +79,7 @@ const TicketList = () => {
           />
         )}
       />
-      <TableContainer className={classes.table} component={Paper}>
-        <TableHead>
-          <TableRow>
-            <TableCell>Ilość miejsc</TableCell>
-            <TableCell align="right">Cena</TableCell>
-            <TableCell align="right">Film</TableCell>
-            <TableCell align="right">Data seansu</TableCell>
-            <TableCell align="right">Godzina rozpoczęcia</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {tickets.map((i) => (
-            <TableRow key={i.id}>
-              <TableCell>{i.reservedSeats.length}</TableCell>
-              <TableCell>{i.price.toFixed(2)} zł</TableCell>
-              <TableCell align="right">{i.screening.film.title}</TableCell>
-              <TableCell align="right">{i.screening.screeningDate}</TableCell>
-              <TableCell align="right">{i.screening.startTime}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </TableContainer>
+      <TicketTable tickets={tickets} />
     </div>
   );
 };
