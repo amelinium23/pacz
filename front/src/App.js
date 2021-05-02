@@ -3,10 +3,10 @@ import { Route, Switch } from "react-router-dom";
 import FilmScreen from "./containers/FilmScreen.jsx";
 import Drawer from "./containers/Drawer.jsx";
 import { makeStyles } from "@material-ui/core/styles";
-import Screening from "./components/Screening.jsx";
+import ScreeningScreen from "./containers/ScreeningScreen.jsx";
 import ScreeningRoom from "./components/ScreeningRooms.jsx";
 import TicketList from "./components/TicketList.jsx";
-import NewTicket from "./components/NewTicket.jsx";
+import NewTicket from "./containers/NewTicket.jsx";
 
 const useStyles = makeStyles({
   container: {
@@ -29,7 +29,7 @@ function App() {
         <Route
           exact
           from="/screenings"
-          render={(props) => <Screening {...props} />}
+          render={(props) => <ScreeningScreen {...props} />}
         />
         <Route
           exact

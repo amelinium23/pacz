@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Autocomplete } from "@material-ui/lab";
 import { TextField, Paper, Button } from "@material-ui/core";
-import FilmSelector from "../containers/FilmSelector.jsx";
-import SeatSelector from "../containers/SeatSelector.jsx";
+import FilmSelector from "./FilmSelector.jsx";
+import SeatSelector from "./SeatSelector.jsx";
 import { ticketTypes } from "../utils/TicketTypes.js";
 
 const NewTicket = () => {
@@ -81,7 +81,7 @@ const NewTicket = () => {
           />
         )}
       />
-      {selectedTicketType.name === "Ulgowy" ? (
+      {selectedTicketType.name === "Ulgowy" && (
         <Autocomplete
           id="combo-box-discount"
           getOptionSelected={(option, value) => option.name === value.name}
@@ -99,8 +99,8 @@ const NewTicket = () => {
             <TextField {...params} label="Zniżka" variant="outlined" required />
           )}
         />
-      ) : null}
-      {selectedTicketType.seatLimited ? null : (
+      )}
+      {!selectedTicketType.seatLimited && (
         <TextField
           value={seatCount}
           id="numberOfSeats"
@@ -138,7 +138,7 @@ const NewTicket = () => {
           <TextField {...params} label="Seans" variant="outlined" required />
         )}
       />
-      {isSeatSelectorOpen ? (
+      {isSeatSelectorOpen && (
         <SeatSelector
           selectedSeats={selectedSeats}
           setSelectedSeats={setSelectedSeats}
@@ -146,7 +146,7 @@ const NewTicket = () => {
           screeningRoom={selectedScreening.screeningRoom}
           screening={selectedScreening.id}
         />
-      ) : null}
+      )}
       <Paper>
         <h2>Wybrane siedzenia:</h2>
         {selectedSeats.length ? (
