@@ -4,7 +4,7 @@ import FilmScreen from "./containers/FilmScreen.jsx";
 import Drawer from "./containers/Drawer.jsx";
 import { makeStyles } from "@material-ui/core/styles";
 import ScreeningScreen from "./containers/ScreeningScreen.jsx";
-import ScreeningRoom from "./components/ScreeningRooms.jsx";
+import ScreeningRoom from "./containers/ScreeningRooms.jsx";
 import TicketList from "./components/TicketList.jsx";
 import NewTicket from "./containers/NewTicket.jsx";
 
