@@ -1,8 +1,3 @@
-import React, { useState } from "react";
-import axios from "axios";
-import { Modal, Button, makeStyles } from "@material-ui/core";
-import DateFnUtils from "@date-io/date-fns";
-import { format } from "date-fns";
 import FilmSelector from "../containers/FilmSelector.jsx";
 import ScreeningRoomSelector from "../containers/ScreeningRoomSelector.jsx";
 import {
@@ -10,6 +5,8 @@ import {
   MuiPickersUtilsProvider,
   KeyboardTimePicker,
 } from "@material-ui/pickers";
+import { Modal, Button, makeStyles } from "@material-ui/core";
+import DateFnUtils from "@date-io/date-fns";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -28,39 +25,23 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const NewScreeningForm = ({ open, setOpen, newScreeningHandler }) => {
+const NewScreeningModal = ({
+  open,
+  setOpen,
+  handleSubmit,
+  selectedDate,
+  handleDateChange,
+  setSelectedFilm,
+  setSelectedScreeningRoom,
+}) => {
   const classes = useStyles();
-  const [selectedFilm, setSelectedFilm] = useState(null); // TypeScript commits sudoku
-  const [selectedScreeningRoom, setSelectedScreeningRoom] = useState(null);
-  const [selectedDate, handleDateChange] = useState(new Date());
-  const addScreening = async () => {
-    try {
-      const json = await axios.post(`http://localhost:8080/screenings`, {
-        filmId: selectedFilm.id,
-        screeningRoomId: selectedScreeningRoom.id,
-        startTime: format(selectedDate, "HH:mm"),
-        screeningDate: format(selectedDate, "yyyy-MM-dd"),
-      });
-      newScreeningHandler(json.data);
-    } catch (err) {
-      alert("Błąd przy dodawaniu seansu");
-    }
+  const onSubmit = (e) => {
+    handleSubmit(e);
   };
-
   return (
     <MuiPickersUtilsProvider utils={DateFnUtils}>
       <Modal open={open} onClose={() => setOpen(false)}>
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            addScreening();
-            setOpen(false);
-            setSelectedFilm(null);
-            setSelectedScreeningRoom(null);
-            handleDateChange(new Date());
-          }}
-          className={classes.paper}
-        >
+        <form onSubmit={onSubmit} className={classes.paper}>
           <FilmSelector setSelectedFilm={setSelectedFilm} />
           <ScreeningRoomSelector
             setSelectedScreeningRoom={setSelectedScreeningRoom}
@@ -94,4 +75,4 @@ const NewScreeningForm = ({ open, setOpen, newScreeningHandler }) => {
   );
 };
 
-export default NewScreeningForm;
+export default NewScreeningModal;

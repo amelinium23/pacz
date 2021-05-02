@@ -11,7 +11,7 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
-import NewScreeningForm from "./NewScreeningForm.jsx";
+import NewScreeningForm from "../containers/NewScreeningForm.jsx";
 
 const useStyles = makeStyles({
   root: {
