@@ -5,7 +5,7 @@ import Drawer from "./containers/Drawer.jsx";
 import { makeStyles } from "@material-ui/core/styles";
 import ScreeningScreen from "./containers/ScreeningScreen.jsx";
 import ScreeningRoom from "./containers/ScreeningRooms.jsx";
-import TicketList from "./components/TicketList.jsx";
+import TicketList from "./containers/TicketList";
 import NewTicket from "./containers/NewTicket.jsx";
 
 const useStyles = makeStyles({

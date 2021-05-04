@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
 import AutoComplete from "@material-ui/lab/Autocomplete";
 import { TextField } from "@material-ui/core";
-import TicketTable from "./TicketTable.jsx";
+import TicketTable from "../components/TicketTable";
+import { Screening, Ticket } from "../utils/APIResponseTypes";
 
 const useStyles = makeStyles({
   root: {
@@ -23,10 +24,12 @@ const useStyles = makeStyles({
   },
 });
 
-const TicketList = () => {
-  const [screenings, updateScreenings] = useState([]);
-  const [tickets, updateTickets] = useState([]);
-  const [selectedScreening, setSelectedScreening] = useState({});
+const TicketList = (): JSX.Element => {
+  const [screenings, updateScreenings] = useState([] as Screening[]);
+  const [tickets, updateTickets] = useState([] as Ticket[]);
+  const [selectedScreening, setSelectedScreening] = useState(
+    {} as Screening | null
+  );
   const classes = useStyles();
 
   useEffect(() => {
@@ -43,7 +46,7 @@ const TicketList = () => {
   useEffect(() => {
     const requestTickets = async () => {
       try {
-        if (selectedScreening.id !== undefined) {
+        if (selectedScreening && selectedScreening.id !== undefined) {
           const res = await axios.get(
             `http://localhost:8080/tickets?screeningId=${selectedScreening.id}`
           );
@@ -71,7 +74,6 @@ const TicketList = () => {
         getOptionSelected={(option, value) => option.id === value.id}
         renderInput={(params) => (
           <TextField
-            className={classes.input}
             {...params}
             label="Wybierz seans"
             variant="outlined"

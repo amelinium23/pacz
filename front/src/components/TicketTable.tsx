@@ -7,6 +7,7 @@ import {
   Paper,
   makeStyles,
 } from "@material-ui/core";
+import { Ticket } from "../utils/APIResponseTypes";
 
 const useStyles = makeStyles({
   table: {
@@ -23,7 +24,7 @@ const useStyles = makeStyles({
   },
 });
 
-const TicketTable = ({ tickets }) => {
+const TicketTable = ({ tickets }: { tickets: Ticket[] }): JSX.Element => {
   const classes = useStyles();
   return (
     <TableContainer className={classes.table} component={Paper}>
@@ -37,7 +38,7 @@ const TicketTable = ({ tickets }) => {
         </TableRow>
       </TableHead>
       <TableBody>
-        {tickets.map((i) => (
+        {tickets.map((i: Ticket) => (
           <TableRow key={i.id}>
             <TableCell>{i.reservedSeats.length}</TableCell>
             <TableCell>{i.price.toFixed(2)} zł</TableCell>
