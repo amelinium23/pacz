@@ -1,5 +1,7 @@
 import { Autocomplete } from "@material-ui/lab";
 import { TextField, makeStyles } from "@material-ui/core";
+import { Film } from "../utils/APIResponseTypes";
+import { ChangeEvent } from "react";
 
 const useStyles = makeStyles(() => ({
   input: {
@@ -9,9 +11,14 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const FilmAutocomplete = ({ handleChange, options }) => {
+interface IProps {
+  handleChange: (newFilm: Film) => void;
+  options: Film[];
+}
+
+const FilmAutocomplete = ({ handleChange, options }: IProps) => {
   const classes = useStyles();
-  const onChange = (event, newValue) => {
+  const onChange = (event: unknown, newValue: Film) => {
     handleChange(newValue);
   };
   return (
@@ -20,7 +27,7 @@ const FilmAutocomplete = ({ handleChange, options }) => {
       disableClearable
       onChange={onChange}
       options={options}
-      getOptionSelected={(option, value) => option.id === value.id}
+      getOptionSelected={(option: Film, value: Film) => option.id === value.id}
       getOptionLabel={(option) => option.title}
       renderInput={(params) => (
         <TextField
@@ -31,7 +38,6 @@ const FilmAutocomplete = ({ handleChange, options }) => {
           required
         />
       )}
-      required
     />
   );
 };

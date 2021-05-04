@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import FilmAutocomplete from "../components/FilmAutocomplete.jsx";
+import FilmAutocomplete from "../components/FilmAutocomplete.tsx";
 
 const FilmSelector = ({ setSelectedFilm }) => {
   const [films, setFilms] = useState([]);
