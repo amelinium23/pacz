@@ -10,6 +10,7 @@ import java.util.List;
 @NoArgsConstructor
 @Setter
 public class TicketDto {
+    private Long id;
     private float price;
     private Long screeningId;
     private ScreeningDto screening;

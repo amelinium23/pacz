@@ -1,10 +1,7 @@
 package com.pacz.cinema.model.services;
 
 import com.pacz.cinema.exceptions.ScreeningNotFoundException;
-import com.pacz.cinema.model.entities.Discounted;
-import com.pacz.cinema.model.entities.Group;
-import com.pacz.cinema.model.entities.Normal;
-import com.pacz.cinema.model.entities.Ticket;
+import com.pacz.cinema.model.entities.*;
 import com.pacz.cinema.model.repositories.ScreeningRepository;
 import com.pacz.cinema.model.repositories.TicketRepository;
 import org.springframework.stereotype.Service;
