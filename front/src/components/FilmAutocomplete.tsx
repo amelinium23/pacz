@@ -1,7 +1,6 @@
 import { Autocomplete } from "@material-ui/lab";
 import { TextField, makeStyles } from "@material-ui/core";
 import { Film } from "../utils/APIResponseTypes";
-import { ChangeEvent } from "react";
 
 const useStyles = makeStyles(() => ({
   input: {
@@ -16,7 +15,7 @@ interface IProps {
   options: Film[];
 }
 
-const FilmAutocomplete = ({ handleChange, options }: IProps) => {
+const FilmAutocomplete = ({ handleChange, options }: IProps): JSX.Element => {
   const classes = useStyles();
   const onChange = (event: unknown, newValue: Film) => {
     handleChange(newValue);

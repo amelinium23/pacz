@@ -9,7 +9,7 @@ import {
 } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
-import React, { useState } from "react";
+import { useState, FormEvent } from "react";
 
 const useStyles = makeStyles({
   input: {
@@ -43,15 +43,23 @@ const useStyles = makeStyles({
   },
 });
 
+interface IProps {
+  handleSubmit: (event: FormEvent<HTMLFormElement>) => void;
+  title: string;
+  updateTitle: (newTitle: string) => void;
+  length: number;
+  updateLength: (newLength: number) => void;
+}
+
 const NewFilmForm = ({
   handleSubmit,
   title,
   updateTitle,
   length,
   updateLength,
-}) => {
+}: IProps): JSX.Element => {
   const classes = useStyles();
-  const onSubmit = (e) => {
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     handleSubmit(e);
     setIsExpanded(false);
   };
@@ -85,7 +93,7 @@ const NewFilmForm = ({
             value={length}
             type="number"
             name="length"
-            onChange={(e) => updateLength(e.target.value)}
+            onChange={(e) => updateLength(parseInt(e.target.value))}
             required
           />
           <br />

@@ -18,6 +18,20 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
+interface IProps {
+  id: number;
+  title: string;
+  newTitle: string;
+  setNewTitle: (newTitle: string) => void;
+  newRuntime: number;
+  setNewRuntime: (newRuntime: number) => void;
+  length: number;
+  isEditing: boolean;
+  setIsEditing: (isEditing: boolean) => void;
+  handleUpdate: (filmId: number) => void;
+  removeFilm: (filmId: number) => void;
+}
+
 const FilmCard = ({
   id,
   title,
@@ -30,13 +44,12 @@ const FilmCard = ({
   setIsEditing,
   handleUpdate,
   removeFilm,
-}) => {
+}: IProps): JSX.Element => {
   const classes = useStyles();
   return (
     <Card key={id} className={classes.info}>
       {isEditing ? (
         <Input
-          className={classes.input}
           name="name"
           value={newTitle}
           placeholder="Nazwa filmu"
@@ -48,11 +61,10 @@ const FilmCard = ({
       )}
       {isEditing ? (
         <Input
-          className={classes.input}
           name="name"
           value={newRuntime}
           placeholder="Długość filmu"
-          onChange={(e) => setNewRuntime(e.target.value)}
+          onChange={(e) => setNewRuntime(parseInt(e.target.value) || 0)}
           required
         />
       ) : (

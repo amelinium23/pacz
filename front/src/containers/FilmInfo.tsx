@@ -1,14 +1,20 @@
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import FilmContext from "../utils/FilmContext";
-import FilmCard from "../components/FilmCard.jsx";
+import FilmCard from "../components/FilmCard";
 import axios from "axios";
 
-const FilmInfo = ({ id, title, length }) => {
+interface IProps {
+  id: number;
+  title: string;
+  length: number;
+}
+
+const FilmInfo = ({ id, title, length }: IProps): JSX.Element => {
   const [films, setFilms] = useContext(FilmContext);
   const [isEditing, setIsEditing] = useState(false);
   const [newTitle, setNewTitle] = useState(title);
   const [newRuntime, setNewRuntime] = useState(length);
-  const removeFilm = async (filmId) => {
+  const removeFilm = async (filmId: number) => {
     try {
       await fetch(`http://localhost:8080/films/${filmId}`, {
         method: "DELETE",
@@ -18,7 +24,7 @@ const FilmInfo = ({ id, title, length }) => {
       alert("Błąd przy usuwaniu");
     }
   };
-  const handleUpdate = async (filmId) => {
+  const handleUpdate = async (filmId: number) => {
     try {
       await axios.put(`http://localhost:8080/films/${filmId}`, {
         title: newTitle,

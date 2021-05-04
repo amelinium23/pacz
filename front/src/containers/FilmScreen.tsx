@@ -1,14 +1,15 @@
 import { Grid } from "@material-ui/core";
 import axios from "axios";
-import React, { useState, useEffect } from "react";
-import FilmResults from "./FilmResults.jsx";
+import { useState, useEffect, FormEvent } from "react";
+import FilmResults from "./FilmResults";
 import FilmContext from "../utils/FilmContext";
-import NewFilmForm from "../components/NewFilmForm.jsx";
+import NewFilmForm from "../components/NewFilmForm";
+import { Film } from "../utils/APIResponseTypes";
 
-const FilmScreen = () => {
+const FilmScreen = (): JSX.Element => {
   const [title, updateTitle] = useState("");
   const [length, updateLength] = useState(0);
-  const filmState = useState([]);
+  const filmState = useState([] as Film[]);
   const [films, setFilms] = filmState; // I don't like it, but oh well
   useEffect(() => {
     const requestFilms = async () => {
@@ -28,16 +29,16 @@ const FilmScreen = () => {
         title: title,
         length: length,
       });
-      setFilms([...films, res.data]);
+      setFilms([...films, res.data as Film]);
     } catch (err) {
       alert("Błąd przy dodawaniu filmu");
     }
   };
-  const submitForm = (e) => {
+  const submitForm = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     addFilm();
     updateTitle("");
-    updateLength(null);
+    updateLength(0);
   };
   return (
     <FilmContext.Provider value={filmState}>

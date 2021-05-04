@@ -1,10 +1,10 @@
-import FilmInfo from "./FilmInfo.jsx";
+import FilmInfo from "./FilmInfo";
 import "../films.css";
 import { useContext } from "react";
 import FilmContext from "../utils/FilmContext";
 import { Grid } from "@material-ui/core";
 
-const FilmResults = () => {
+const FilmResults = (): JSX.Element => {
   const [films] = useContext(FilmContext);
   return (
     <Grid container>
