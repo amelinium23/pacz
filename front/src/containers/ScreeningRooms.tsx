@@ -2,8 +2,9 @@ import React from "react";
 
 import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
-import NewScreeningRoomForm from "../components/NewScreeningRoomForm.jsx";
-import ScreeningRoomTable from "../components/ScreeningRoomTable.jsx";
+import NewScreeningRoomForm from "../components/NewScreeningRoomForm";
+import ScreeningRoomTable from "../components/ScreeningRoomTable";
+import { ScreeningRoom as ScreeningRoomType } from "../utils/APIResponseTypes";
 
 const useStyles = makeStyles({
   divcontainer: {
@@ -11,12 +12,12 @@ const useStyles = makeStyles({
   },
 });
 
-export default function ScreeningRoom() {
+const ScreeningRoom = (): JSX.Element => {
   const classes = useStyles();
   const [name, setName] = React.useState("");
   const [seatsInRow, setSeatsInRow] = React.useState(0);
   const [rowNumber, setRowNumber] = React.useState(0);
-  const screeningRoomState = React.useState([]);
+  const screeningRoomState = React.useState([] as ScreeningRoomType[]);
   const [screeningRooms, setScreeningRooms] = screeningRoomState;
 
   const requestScreeningRooms = async () => {
@@ -57,4 +58,6 @@ export default function ScreeningRoom() {
       <ScreeningRoomTable screeningRooms={screeningRooms} />
     </div>
   );
-}
+};
+
+export default ScreeningRoom;

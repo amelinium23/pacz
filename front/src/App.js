@@ -1,10 +1,9 @@
-import React from "react";
 import { Route, Switch } from "react-router-dom";
 import FilmScreen from "./containers/FilmScreen";
 import Drawer from "./containers/Drawer.jsx";
 import { makeStyles } from "@material-ui/core/styles";
 import ScreeningScreen from "./containers/ScreeningScreen.jsx";
-import ScreeningRoom from "./containers/ScreeningRooms.jsx";
+import ScreeningRoom from "./containers/ScreeningRooms";
 import TicketList from "./containers/TicketList";
 import NewTicket from "./containers/NewTicket.jsx";
 

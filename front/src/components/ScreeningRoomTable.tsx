@@ -8,6 +8,7 @@ import {
   Paper,
   makeStyles,
 } from "@material-ui/core";
+import { ScreeningRoom } from "../utils/APIResponseTypes";
 
 const useStyles = makeStyles({
   table: {
@@ -25,7 +26,11 @@ const useStyles = makeStyles({
   },
 });
 
-const ScreeningRoomTable = ({ screeningRooms }) => {
+const ScreeningRoomTable = ({
+  screeningRooms,
+}: {
+  screeningRooms: ScreeningRoom[];
+}): JSX.Element => {
   const classes = useStyles();
   return (
     <TableContainer className={classes.tablecontainer} component={Paper}>

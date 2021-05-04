@@ -30,12 +30,19 @@ const useStyles = makeStyles({
   },
 });
 
+interface IProps {
+  handleSubmit: () => void;
+  setName: (newName: string) => void;
+  setSeatsInRow: (newAmount: number) => void;
+  setRowNumber: (newAmount: number) => void;
+}
+
 const NewScreeningRoomForm = ({
   handleSubmit,
   setName,
   setSeatsInRow,
   setRowNumber,
-}) => {
+}: IProps): JSX.Element => {
   const classes = useStyles();
   const [isExpanded, setIsExpanded] = useState(false);
   return (
@@ -71,7 +78,7 @@ const NewScreeningRoomForm = ({
             name="seatsInRow"
             type="numeric"
             placeholder="Wpisz liczbę miejsc w rzędzie"
-            onChange={(e) => setSeatsInRow(e.target.value)}
+            onChange={(e) => setSeatsInRow(parseInt(e.target.value) || 0)}
             required
           />{" "}
           <br />
@@ -80,7 +87,7 @@ const NewScreeningRoomForm = ({
             name="rowNumber"
             type="numeric"
             placeholder="Wpisz liczbę rzędów"
-            onChange={(e) => setRowNumber(e.target.value)}
+            onChange={(e) => setRowNumber(parseInt(e.target.value) || 0)}
             required
           />{" "}
           <br />
