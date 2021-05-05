@@ -8,6 +8,7 @@ import {
   TableBody,
   Paper,
 } from "@material-ui/core";
+import { Screening } from "../utils/APIResponseTypes";
 
 const useStyles = makeStyles({
   table: {
@@ -22,11 +23,15 @@ const useStyles = makeStyles({
   },
 });
 
-const ScreeningTable = ({ screenings }) => {
+const ScreeningTable = ({
+  screenings,
+}: {
+  screenings: Screening[];
+}): JSX.Element => {
   const classes = useStyles();
   return (
     <TableContainer className={classes.container} component={Paper}>
-      <Table className={classes.Table}>
+      <Table className={classes.table}>
         <TableHead>
           <TableRow>
             <TableCell>Film</TableCell>

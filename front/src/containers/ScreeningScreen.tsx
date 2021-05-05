@@ -2,8 +2,9 @@ import React from "react";
 import { Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
-import NewScreeningForm from "./NewScreeningForm.jsx";
-import ScreeningTable from "../components/ScreeningTable.jsx";
+import NewScreeningForm from "./NewScreeningForm";
+import ScreeningTable from "../components/ScreeningTable";
+import { Screening } from "../utils/APIResponseTypes";
 
 const useStyles = makeStyles({
   root: {
@@ -21,9 +22,9 @@ const useStyles = makeStyles({
   },
 });
 
-const ScreeningScreen = () => {
+const ScreeningScreen = (): JSX.Element => {
   const classes = useStyles();
-  const [screenings, setScreenings] = React.useState([]);
+  const [screenings, setScreenings] = React.useState([] as Screening[]);
   const [formOpen, setFormOpen] = React.useState(false);
 
   async function requestScreening() {
@@ -52,7 +53,7 @@ const ScreeningScreen = () => {
       <NewScreeningForm
         open={formOpen}
         setOpen={setFormOpen}
-        newScreeningHandler={(newScreening) =>
+        newScreeningHandler={(newScreening: Screening) =>
           setScreenings([...screenings, newScreening])
         }
       />

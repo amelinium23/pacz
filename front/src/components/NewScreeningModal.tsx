@@ -1,5 +1,5 @@
-import FilmSelector from "../containers/FilmSelector.jsx";
-import ScreeningRoomSelector from "../containers/ScreeningRoomSelector.jsx";
+import FilmSelector from "../containers/FilmSelector";
+import ScreeningRoomSelector from "../containers/ScreeningRoomSelector";
 import {
   KeyboardDatePicker,
   MuiPickersUtilsProvider,
@@ -7,6 +7,8 @@ import {
 } from "@material-ui/pickers";
 import { Modal, Button, makeStyles } from "@material-ui/core";
 import DateFnUtils from "@date-io/date-fns";
+import { FormEvent } from "react";
+import { Film, ScreeningRoom } from "../utils/APIResponseTypes";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -25,6 +27,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+interface IProps {
+  open: boolean;
+  setOpen: (newValue: boolean) => void;
+  handleSubmit: (event: FormEvent<HTMLFormElement>) => void;
+  selectedDate: Date | null;
+  handleDateChange: (newDate: Date | null) => void;
+  setSelectedFilm: (newFilm: Film) => void;
+  setSelectedScreeningRoom: (newScreeningRoom: ScreeningRoom | null) => void;
+}
 const NewScreeningModal = ({
   open,
   setOpen,
@@ -33,9 +44,9 @@ const NewScreeningModal = ({
   handleDateChange,
   setSelectedFilm,
   setSelectedScreeningRoom,
-}) => {
+}: IProps): JSX.Element => {
   const classes = useStyles();
-  const onSubmit = (e) => {
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     handleSubmit(e);
   };
   return (
@@ -48,7 +59,7 @@ const NewScreeningModal = ({
           />
           <KeyboardDatePicker
             className={classes.input}
-            clearable="true"
+            clearable={true}
             variant="inline"
             value={selectedDate}
             label="Data seansu"

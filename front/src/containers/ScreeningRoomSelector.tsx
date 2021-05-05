@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { TextField, makeStyles } from "@material-ui/core";
 import Autocomplete from "@material-ui/lab/Autocomplete";
+import { ScreeningRoom } from "../utils/APIResponseTypes";
 
 const useStyles = makeStyles(() => ({
   input: {
@@ -11,24 +12,29 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const ScreeningRoomSelector = ({ setSelectedScreeningRoom }) => {
+interface IProps {
+  setSelectedScreeningRoom: (newScreeningRoom: ScreeningRoom | null) => void;
+}
+const ScreeningRoomSelector = ({
+  setSelectedScreeningRoom,
+}: IProps): JSX.Element => {
   const classes = useStyles();
-  const [screeningRooms, setScreeningRooms] = useState([]);
+  const [screeningRooms, setScreeningRooms] = useState([] as ScreeningRoom[]);
   const requestData = async () => {
     try {
-      let json = await axios.get(`http://localhost:8080/screeningRooms`);
-      setScreeningRooms(json.data);
+      const json = await axios.get(`http://localhost:8080/screeningRooms`);
+      setScreeningRooms(json.data as ScreeningRoom[]);
     } catch (err) {
       alert("Błąd przy pobieraniu sal");
     }
   };
 
-  useEffect(() => requestData(), []);
+  useEffect(() => void requestData(), []);
 
   return (
     <Autocomplete
       id="room-selection"
-      onChange={(event, newValue) => {
+      onChange={(event, newValue: ScreeningRoom | null) => {
         console.log(newValue);
         setSelectedScreeningRoom(newValue);
       }}

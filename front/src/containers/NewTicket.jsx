@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { Autocomplete } from "@material-ui/lab";
 import { TextField, Paper, Button } from "@material-ui/core";
-import FilmSelector from "./FilmSelector.jsx";
+import FilmSelector from "./FilmSelector";
 import SeatSelector from "./SeatSelector.jsx";
 import { ticketTypes } from "../utils/TicketTypes.js";
 

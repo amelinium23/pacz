@@ -2,7 +2,7 @@ import { Route, Switch } from "react-router-dom";
 import FilmScreen from "./containers/FilmScreen";
 import Drawer from "./containers/Drawer.tsx";
 import { makeStyles } from "@material-ui/core/styles";
-import ScreeningScreen from "./containers/ScreeningScreen.jsx";
+import ScreeningScreen from "./containers/ScreeningScreen";
 import ScreeningRoom from "./containers/ScreeningRooms";
 import TicketList from "./containers/TicketList";
 import NewTicket from "./containers/NewTicket.jsx";
