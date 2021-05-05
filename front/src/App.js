@@ -1,6 +1,6 @@
 import { Route, Switch } from "react-router-dom";
 import FilmScreen from "./containers/FilmScreen";
-import Drawer from "./containers/Drawer.jsx";
+import Drawer from "./containers/Drawer.tsx";
 import { makeStyles } from "@material-ui/core/styles";
 import ScreeningScreen from "./containers/ScreeningScreen.jsx";
 import ScreeningRoom from "./containers/ScreeningRooms";

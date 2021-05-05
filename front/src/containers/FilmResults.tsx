@@ -1,5 +1,4 @@
 import FilmInfo from "./FilmInfo";
-import "../films.css";
 import { useContext } from "react";
 import FilmContext from "../utils/FilmContext";
 import { Grid } from "@material-ui/core";
