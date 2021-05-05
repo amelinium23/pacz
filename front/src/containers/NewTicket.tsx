@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Autocomplete } from "@material-ui/lab";
-import { TextField, Paper, Button } from "@material-ui/core";
+import { TextField, Button } from "@material-ui/core";
 import FilmSelector from "./FilmSelector";
-import SeatSelector from "./SeatSelector.jsx";
-import { ticketTypes } from "../utils/TicketTypes.js";
+import SeatSelector from "./SeatSelector";
+import ScreeningAutocomplete from "../components/ScreeningAutocomplete";
+import { ticketTypes } from "../utils/TicketTypes";
+import { Screening, Seat, Film } from "../utils/APIResponseTypes";
+import SelectedSeatsList from "../components/SelectedSeatsList";
 
-const NewTicket = () => {
+const NewTicket = (): JSX.Element => {
   const ticketBasePrice = 15.4;
-
   const discounts = [
     {
       name: "Uczeń",
@@ -31,12 +33,14 @@ const NewTicket = () => {
       value: 100,
     },
   ];
-  const [screenings, setScreenings] = useState([]);
+  const [screenings, setScreenings] = useState([] as Screening[]);
   const [selectedTicketType, setSelectedTicketType] = useState(ticketTypes[0]);
-  const [selectedFilm, setSelectedFilm] = useState(null);
-  const [selectedScreening, setSelectedScreening] = useState(null);
+  const [selectedFilm, setSelectedFilm] = useState(null as Film | null);
+  const [selectedScreening, setSelectedScreening] = useState(
+    null as Screening | null
+  );
   const [isSeatSelectorOpen, setIsSelectorOpen] = useState(false);
-  const [selectedSeats, setSelectedSeats] = useState([]);
+  const [selectedSeats, setSelectedSeats] = useState([] as Seat[]);
   const [seatCount, setSeatCount] = useState(1);
   const [discount, setDiscount] = useState(discounts[0]);
   const [ticketPrice, setTicketPrice] = useState(ticketBasePrice);
@@ -67,9 +71,15 @@ const NewTicket = () => {
         getOptionLabel={(option) => option.name}
         onChange={(event, newValue) => {
           setSelectedTicketType(newValue);
-          setDiscount(0);
+          setDiscount(discounts[0]);
           setSeatCount(1);
-          setTicketPrice(newValue.price(ticketBasePrice, seatCount, discount));
+          setTicketPrice(
+            newValue.price({
+              ticketBasePrice: ticketBasePrice,
+              seatCount: seatCount,
+              discount: discount,
+            })
+          );
         }}
         style={{ width: 300 }}
         renderInput={(params) => (
@@ -91,7 +101,11 @@ const NewTicket = () => {
           onChange={(event, newValue) => {
             setDiscount(newValue);
             setTicketPrice(
-              selectedTicketType.price(ticketBasePrice, seatCount, newValue)
+              selectedTicketType.price({
+                ticketBasePrice: ticketBasePrice,
+                seatCount: seatCount,
+                discount: newValue,
+              })
             );
           }}
           style={{ width: 300 }}
@@ -106,59 +120,35 @@ const NewTicket = () => {
           id="numberOfSeats"
           label="Liczba miejsc"
           onChange={(e) => {
-            setSeatCount(e.target.value);
+            setSeatCount(parseInt(e.target.value) || 0);
             setTicketPrice(
-              selectedTicketType.price(
-                ticketBasePrice,
-                e.target.value,
-                discount
-              )
+              selectedTicketType.price({
+                ticketBasePrice: ticketBasePrice,
+                seatCount: parseInt(e.target.value) || 0,
+                discount: discount,
+              })
             );
           }}
           type="number"
         />
       )}
       <FilmSelector setSelectedFilm={setSelectedFilm} />
-      <Autocomplete
-        id="combo-box-screenings"
-        disableClearable
-        options={screenings}
-        getOptionSelected={(option, value) => option.id === value.id}
-        getOptionLabel={(option) =>
-          `${option.screeningDate} ${option.startTime}`
-        }
-        onChange={(event, newValue) => {
-          if (!isSeatSelectorOpen) {
-            setIsSelectorOpen(true);
-          }
-          setSelectedScreening(newValue);
-        }}
-        style={{ width: 300 }}
-        renderInput={(params) => (
-          <TextField {...params} label="Seans" variant="outlined" required />
-        )}
+      <ScreeningAutocomplete
+        screenings={screenings}
+        isSeatSelectorOpen={isSeatSelectorOpen}
+        setIsSelectorOpen={setIsSelectorOpen}
+        setSelectedScreening={setSelectedScreening}
       />
-      {isSeatSelectorOpen && (
+      {isSeatSelectorOpen && selectedScreening && (
         <SeatSelector
           selectedSeats={selectedSeats}
           setSelectedSeats={setSelectedSeats}
           seatCount={selectedTicketType.seatLimited ? 1 : seatCount}
           screeningRoom={selectedScreening.screeningRoom}
-          screening={selectedScreening.id}
+          screening={selectedScreening}
         />
       )}
-      <Paper>
-        <h2>Wybrane siedzenia:</h2>
-        {selectedSeats.length ? (
-          selectedSeats.map((seat) => (
-            <p
-              key={`row${seat.row}-seat${seat.seat}`}
-            >{`Rząd ${seat.row}, Miejsce ${seat.seat}`}</p>
-          ))
-        ) : (
-          <p>Wybierz siedzenia</p>
-        )}
-      </Paper>
+      <SelectedSeatsList selectedSeats={selectedSeats} />
       <p>
         Cena ostateczna:{" "}
         {Number.isNaN(ticketPrice) ? "Wybierz zniżkę" : ticketPrice.toFixed(2)}{" "}
@@ -166,22 +156,24 @@ const NewTicket = () => {
       </p>
       <Button
         onClick={async () => {
-          await selectedTicketType.onSubmit(
-            selectedSeats,
-            ticketBasePrice,
-            selectedScreening,
-            seatCount,
-            discount
-          );
+          selectedScreening &&
+            (await selectedTicketType.onSubmit({
+              selectedSeats: selectedSeats,
+              ticketBasePrice: ticketBasePrice,
+              selectedScreening: selectedScreening,
+              seatCount: seatCount,
+              discount: discount,
+            }));
         }}
         disabled={
-          !selectedTicketType.allDataInserted(
-            selectedSeats.length,
-            ticketBasePrice,
-            selectedScreening,
-            seatCount,
-            discount
-          )
+          !!selectedScreening &&
+          !selectedTicketType.allDataInserted({
+            selectedSeats: selectedSeats,
+            ticketBasePrice: ticketBasePrice,
+            selectedScreening: selectedScreening,
+            seatCount: seatCount,
+            discount: discount,
+          })
         }
       >
         Zatwierdź zakup

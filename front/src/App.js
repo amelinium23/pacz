@@ -5,7 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import ScreeningScreen from "./containers/ScreeningScreen";
 import ScreeningRoom from "./containers/ScreeningRooms";
 import TicketList from "./containers/TicketList";
-import NewTicket from "./containers/NewTicket.jsx";
+import NewTicket from "./containers/NewTicket";
 import "./films.css";
 
 const useStyles = makeStyles({
