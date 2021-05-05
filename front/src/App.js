@@ -6,6 +6,7 @@ import ScreeningScreen from "./containers/ScreeningScreen";
 import ScreeningRoom from "./containers/ScreeningRooms";
 import TicketList from "./containers/TicketList";
 import NewTicket from "./containers/NewTicket.jsx";
+import "./films.css";
 
 const useStyles = makeStyles({
   container: {
