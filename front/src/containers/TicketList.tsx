@@ -41,7 +41,7 @@ const TicketList = (): JSX.Element => {
         alert("Błąd pobierania seansów");
       }
     };
-    requestScreenings();
+    void requestScreenings();
   }, []);
   useEffect(() => {
     const requestTickets = async () => {
@@ -57,7 +57,7 @@ const TicketList = (): JSX.Element => {
         alert("Błąd pobierania biletów");
       }
     };
-    requestTickets();
+    void requestTickets();
   }, [selectedScreening]);
 
   return (

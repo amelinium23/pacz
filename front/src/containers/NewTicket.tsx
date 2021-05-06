@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import { Autocomplete } from "@material-ui/lab";
 import { TextField, Button } from "@material-ui/core";
 import FilmSelector from "./FilmSelector";
@@ -81,7 +81,7 @@ const NewTicket = (): JSX.Element => {
       if (selectedFilm === null) {
         return;
       }
-      const json = await axios.get(
+      const json: AxiosResponse<Screening[]> = await axios.get(
         `http://localhost:8080/screenings?filmId=${selectedFilm.id}`
       );
       setScreenings(json.data);
@@ -89,7 +89,7 @@ const NewTicket = (): JSX.Element => {
         setSelectedScreening(json.data[0]);
       }
     };
-    requestScreenings();
+    void requestScreenings();
   }, [selectedFilm]);
 
   return (

@@ -74,7 +74,7 @@ const FilmCard = ({
       )}
       <Button
         className={classes.button}
-        onClick={async () => {
+        onClick={() => {
           isEditing ? handleUpdate(id) : setIsEditing(true);
         }}
       >

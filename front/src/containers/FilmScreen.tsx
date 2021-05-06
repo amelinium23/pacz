@@ -20,7 +20,7 @@ const FilmScreen = (): JSX.Element => {
         alert("Bład połączenia");
       }
     };
-    requestFilms();
+    void requestFilms();
   }, [setFilms]);
 
   const addFilm = async () => {
@@ -36,7 +36,7 @@ const FilmScreen = (): JSX.Element => {
   };
   const submitForm = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    addFilm();
+    void addFilm();
     updateTitle("");
     updateLength(0);
   };

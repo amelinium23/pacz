@@ -81,7 +81,7 @@ const SeatSelector = ({
     setSelectedSeats([]);
   }, [seatCount, setSelectedSeats]);
   useEffect(() => {
-    getReservations();
+    void getReservations();
     setSelectedSeats([]);
     // eslint-disable-next-line
   }, [screening]);

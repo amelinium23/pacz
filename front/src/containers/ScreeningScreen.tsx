@@ -39,7 +39,7 @@ const ScreeningScreen = (): JSX.Element => {
   }
 
   React.useEffect(() => {
-    requestScreening();
+    void requestScreening();
   }, []);
 
   return (

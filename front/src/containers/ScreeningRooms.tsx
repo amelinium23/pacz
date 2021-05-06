@@ -43,7 +43,7 @@ const ScreeningRoom = (): JSX.Element => {
   };
 
   React.useEffect(() => {
-    requestScreeningRooms();
+    void requestScreeningRooms();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

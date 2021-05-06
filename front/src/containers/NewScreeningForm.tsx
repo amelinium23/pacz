@@ -22,7 +22,7 @@ const NewScreeningForm = ({
   const [selectedDate, handleDateChange] = useState(new Date() as Date | null);
   const submitScreeningForm = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    addScreening();
+    void addScreening();
     setOpen(false);
     setSelectedFilm(null);
     setSelectedScreeningRoom(null);
