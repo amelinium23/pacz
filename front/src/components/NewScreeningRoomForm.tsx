@@ -12,21 +12,23 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 const useStyles = makeStyles({
   input: {
-    width: "580px",
+    // margin: "1.25% 1.25% 1% 1.25%",
+    marginTop: "1.25%",
+    marginBottom: "1.25%",
+    marginRight: "1%",
+    marginLeft: "1%",
+    width: "670px",
   },
-
   button: {
+    display: "flex",
     alignItems: "center",
     alignContent: "center",
-    marginTop: "2%",
     width: "200px",
-    border: "1px solid black",
+    margin: "1.5% auto 1% auto",
     backgroundColor: "white",
-  },
-  submit: {
-    marginTop: "3%",
-    width: "100%",
-    border: "1px solid black",
+    borderRadius: "10px",
+    border: "1px solid #3f50b5",
+    boxShadow: "6px 2px 4px 2px rgba(154,154,154,0.64)",
   },
 });
 
@@ -46,7 +48,14 @@ const NewScreeningRoomForm = ({
   const classes = useStyles();
   const [isExpanded, setIsExpanded] = useState(false);
   return (
-    <Accordion expanded={isExpanded} style={{ margin: "auto", width: "50%" }}>
+    <Accordion
+      expanded={isExpanded}
+      style={{
+        margin: "1.5% auto 1.5% auto",
+        width: "50%",
+        boxShadow: "6px 2px 4px 2px rgba(154,154,154,0.64)",
+      }}
+    >
       <AccordionSummary
         expandIcon={<ExpandMoreIcon />}
         onClick={() => setIsExpanded(!isExpanded)}
@@ -92,7 +101,7 @@ const NewScreeningRoomForm = ({
           />{" "}
           <br />
           <Button
-            className={classes.submit}
+            className={classes.button}
             type="submit"
             color="primary"
             fullWidth

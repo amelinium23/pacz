@@ -39,7 +39,7 @@ const ScreeningRoomTable = ({
           <TableRow>
             <TableCell>Nazwa</TableCell>
             <TableCell align="right">Liczba rzędów</TableCell>
-            <TableCell align="right" style={{ width: "200px" }}>
+            <TableCell align="right" className={classes.cell}>
               Liczba miejsc w rzędzie
             </TableCell>
           </TableRow>

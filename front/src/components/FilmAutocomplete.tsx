@@ -7,6 +7,7 @@ const useStyles = makeStyles(() => ({
     width: "100%",
     marginBottom: "1%",
     marginTop: "1.25%",
+    backgroundColor: "white",
   },
 }));
 

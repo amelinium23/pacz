@@ -13,10 +13,12 @@ import { Screening } from "../utils/APIResponseTypes";
 const useStyles = makeStyles({
   table: {
     width: "auto",
+    boxShadow: "9px -5px 20px 2px rgba(135,135,135,0.85)",
   },
   container: {
     display: "flex",
     alignSelf: "center",
+    marginTop: "2.69%",
   },
   cell: {
     width: "350px",

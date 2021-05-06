@@ -8,8 +8,39 @@ import ScreeningAutocomplete from "../components/ScreeningAutocomplete";
 import { ticketTypes } from "../utils/TicketTypes";
 import { Screening, Seat, Film } from "../utils/APIResponseTypes";
 import SelectedSeatsList from "../components/SelectedSeatsList";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles(() => ({
+  input: {
+    width: "100%",
+    margin: "1.25% auto 1.25%",
+    backgroundColor: "white",
+  },
+  options: {
+    width: "auto",
+    margin: "1.25% auto",
+    backgroundColor: "white",
+  },
+  button: {
+    display: "flex",
+    alignItems: "center",
+    alignContent: "center",
+    width: "200px",
+    margin: "10px auto",
+    backgroundColor: "white",
+    borderRadius: "10px",
+    border: "1px solid #3f50b5",
+    boxShadow: "6px 2px 4px 2px rgba(154,154,154,0.64)",
+  },
+  summary: {
+    fontSize: "20px",
+    textAlign: "right",
+    fontWeight: "bold",
+  },
+}));
 
 const NewTicket = (): JSX.Element => {
+  const classes = useStyles();
   const ticketBasePrice = 15.4;
   const discounts = [
     {
@@ -81,7 +112,7 @@ const NewTicket = (): JSX.Element => {
             })
           );
         }}
-        style={{ width: "auto", marginTop: "1.5%" }}
+        className={classes.options}
         renderInput={(params) => (
           <TextField
             {...params}
@@ -108,7 +139,7 @@ const NewTicket = (): JSX.Element => {
               })
             );
           }}
-          style={{ width: "auto", marginTop: "1.5%" }}
+          className={classes.options}
           renderInput={(params) => (
             <TextField {...params} label="Zniżka" variant="outlined" required />
           )}
@@ -119,6 +150,7 @@ const NewTicket = (): JSX.Element => {
           value={seatCount}
           id="numberOfSeats"
           label="Liczba miejsc"
+          className={classes.input}
           onChange={(e) => {
             setSeatCount(parseInt(e.target.value) || 0);
             setTicketPrice(
@@ -129,6 +161,7 @@ const NewTicket = (): JSX.Element => {
               })
             );
           }}
+          variant="outlined"
           type="number"
         />
       )}
@@ -149,12 +182,13 @@ const NewTicket = (): JSX.Element => {
         />
       )}
       <SelectedSeatsList selectedSeats={selectedSeats} />
-      <p>
+      <p className={classes.summary}>
         Cena ostateczna:{" "}
         {Number.isNaN(ticketPrice) ? "Wybierz zniżkę" : ticketPrice.toFixed(2)}{" "}
         zł
       </p>
       <Button
+        className={classes.button}
         onClick={async () => {
           selectedScreening &&
             (await selectedTicketType.onSubmit({
