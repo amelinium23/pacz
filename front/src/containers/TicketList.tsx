@@ -12,13 +12,13 @@ const useStyles = makeStyles({
     width: "50%",
     margin: "auto",
   },
-
   button: {
     display: "flex",
     alignItems: "center",
     alignContent: "center",
     width: "200px",
-    margin: "10px auto",
+    marginBottom: "2%",
+    marginTop: "2%",
     border: "1px solid black",
     backgroundColor: "white",
   },
@@ -71,6 +71,7 @@ const TicketList = (): JSX.Element => {
         getOptionLabel={(option) =>
           `${option.film.title} - ${option.screeningDate} - ${option.startTime}`
         }
+        style={{ marginTop: "1.5%" }}
         getOptionSelected={(option, value) => option.id === value.id}
         renderInput={(params) => (
           <TextField

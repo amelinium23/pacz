@@ -13,7 +13,7 @@ import { useState, FormEvent } from "react";
 
 const useStyles = makeStyles({
   input: {
-    width: "700px",
+    width: "600px",
     margin: "10px 1% 10px 1%",
   },
   table: {
@@ -27,16 +27,15 @@ const useStyles = makeStyles({
     width: "300px",
   },
   button: {
+    display: "flex",
     alignItems: "center",
     alignContent: "center",
     width: "200px",
-    border: "1px solid black",
+    margin: "10px auto",
     backgroundColor: "white",
-  },
-  submit: {
-    margin: "10px 1% 10px 1%",
-    width: "100%",
-    border: "1px solid black",
+    borderRadius: "10px",
+    border: "1px solid #3f50b5",
+    boxShadow: "6px 2px 4px 2px rgba(154,154,154,0.64)",
   },
   filmForm: {
     margin: "auto",
@@ -66,7 +65,14 @@ const NewFilmForm = ({
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
-    <Accordion expanded={isExpanded} style={{ margin: "auto", width: "50%" }}>
+    <Accordion
+      expanded={isExpanded}
+      style={{
+        margin: "auto",
+        width: "50%",
+        boxShadow: "6px 2px 4px 2px rgba(154,154,154,0.64)",
+      }}
+    >
       <AccordionSummary
         expandIcon={<ExpandMoreIcon />}
         onClick={() => setIsExpanded(!isExpanded)}
@@ -101,7 +107,7 @@ const NewFilmForm = ({
             type="submit"
             color="primary"
             fullWidth
-            className={classes.submit}
+            className={classes.button}
           >
             Zatwierdź
           </Button>

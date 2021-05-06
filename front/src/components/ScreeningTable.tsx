@@ -12,14 +12,14 @@ import { Screening } from "../utils/APIResponseTypes";
 
 const useStyles = makeStyles({
   table: {
-    width: "650px",
+    width: "auto",
   },
   container: {
     display: "flex",
     alignSelf: "center",
   },
   cell: {
-    width: "250px",
+    width: "350px",
   },
 });
 

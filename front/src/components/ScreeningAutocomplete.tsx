@@ -28,7 +28,7 @@ const ScreeningAutocomplete = ({
         }
         setSelectedScreening(newValue);
       }}
-      style={{ width: 300 }}
+      style={{ width: "auto", marginTop: "1.5%" }}
       renderInput={(params) => (
         <TextField {...params} label="Seans" variant="outlined" required />
       )}

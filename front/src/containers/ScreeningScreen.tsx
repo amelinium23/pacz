@@ -17,8 +17,10 @@ const useStyles = makeStyles({
     alignContent: "center",
     width: "200px",
     margin: "10px auto",
-    border: "1px solid black",
     backgroundColor: "white",
+    borderRadius: "10px",
+    border: "1px solid #3f50b5",
+    boxShadow: "6px 2px 4px 2px rgba(154,154,154,0.64)",
   },
 });
 
@@ -44,7 +46,7 @@ const ScreeningScreen = (): JSX.Element => {
     <div className={classes.root}>
       <Button
         className={classes.button}
-        color="primary"
+        color="default"
         onClick={() => setFormOpen(!formOpen)}
       >
         Zaplanuj seans

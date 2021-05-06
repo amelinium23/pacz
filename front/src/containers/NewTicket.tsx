@@ -81,7 +81,7 @@ const NewTicket = (): JSX.Element => {
             })
           );
         }}
-        style={{ width: 300 }}
+        style={{ width: "auto", marginTop: "1.5%" }}
         renderInput={(params) => (
           <TextField
             {...params}
@@ -108,7 +108,7 @@ const NewTicket = (): JSX.Element => {
               })
             );
           }}
-          style={{ width: 300 }}
+          style={{ width: "auto", marginTop: "1.5%" }}
           renderInput={(params) => (
             <TextField {...params} label="Zniżka" variant="outlined" required />
           )}

@@ -6,7 +6,8 @@ const useStyles = makeStyles(() => ({
     textAlign: "center",
     padding: "5px",
     border: "1px solid black",
-    margin: "10px",
+    margin: "10px 10px 10px 10px",
+    boxShadow: "6px 2px 4px 2px rgba(154,154,154,0.64)",
   },
   button: {
     alignSelf: "center",
@@ -15,6 +16,7 @@ const useStyles = makeStyles(() => ({
     marginTop: "10px",
     marginBottom: "10px",
     margin: "2%",
+    boxShadow: "6px 2px 4px 2px rgba(154,154,154,0.64)",
   },
 }));
 

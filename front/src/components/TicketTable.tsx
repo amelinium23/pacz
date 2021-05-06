@@ -12,15 +12,14 @@ import { Ticket } from "../utils/APIResponseTypes";
 const useStyles = makeStyles({
   table: {
     marginRight: "30px",
-    marginTop: "10px",
-    width: "84.5%",
+    marginTop: "2%",
   },
   container: {
     display: "flex",
     alignSelf: "center",
   },
   cell: {
-    width: "auto",
+    width: "210px",
   },
 });
 
@@ -30,21 +29,41 @@ const TicketTable = ({ tickets }: { tickets: Ticket[] }): JSX.Element => {
     <TableContainer className={classes.table} component={Paper}>
       <TableHead>
         <TableRow>
-          <TableCell>Ilość miejsc</TableCell>
-          <TableCell align="right">Cena</TableCell>
-          <TableCell align="right">Film</TableCell>
-          <TableCell align="right">Data seansu</TableCell>
-          <TableCell align="right">Godzina rozpoczęcia</TableCell>
+          <TableCell className={classes.cell} align="center">
+            Ilość miejsc
+          </TableCell>
+          <TableCell className={classes.cell} align="center">
+            Cena
+          </TableCell>
+          <TableCell className={classes.cell} align="center">
+            Film
+          </TableCell>
+          <TableCell className={classes.cell} align="center">
+            Data seansu
+          </TableCell>
+          <TableCell className={classes.cell} align="center">
+            Godzina rozpoczęcia
+          </TableCell>
         </TableRow>
       </TableHead>
       <TableBody>
         {tickets.map((i: Ticket) => (
           <TableRow key={i.id}>
-            <TableCell>{i.reservedSeats.length}</TableCell>
-            <TableCell>{i.price.toFixed(2)} zł</TableCell>
-            <TableCell align="right">{i.screening.film.title}</TableCell>
-            <TableCell align="right">{i.screening.screeningDate}</TableCell>
-            <TableCell align="right">{i.screening.startTime}</TableCell>
+            <TableCell className={classes.cell} align="center">
+              {i.reservedSeats.length}
+            </TableCell>
+            <TableCell className={classes.cell} align="center">
+              {i.price.toFixed(2)} zł
+            </TableCell>
+            <TableCell className={classes.cell} align="center">
+              {i.screening.film.title}
+            </TableCell>
+            <TableCell className={classes.cell} align="center">
+              {i.screening.screeningDate}
+            </TableCell>
+            <TableCell className={classes.cell} align="center">
+              {i.screening.startTime}
+            </TableCell>
           </TableRow>
         ))}
       </TableBody>
