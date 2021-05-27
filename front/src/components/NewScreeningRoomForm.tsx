@@ -17,7 +17,7 @@ const useStyles = makeStyles({
     marginBottom: "1.25%",
     marginRight: "1%",
     marginLeft: "1%",
-    width: "670px",
+    width: "865px",
   },
   button: {
     display: "flex",

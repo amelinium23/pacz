@@ -31,7 +31,7 @@
 
 #s1 > th {
   font-size: 14px;
-  font-weight: "bold";
+  font-weight: bold;
 }
 
 #submit {
@@ -40,7 +40,7 @@
   font-size: 14px;
   margin-top: 10px;
   color: white;
-  font-family: "Roboto";
+  font-family: Roboto;
 }
 
 .Title {

@@ -10,15 +10,15 @@ body {
 .Home {
   font-family: "Roboto";
   font-size: 14px;
-  align-items: "center";
-  justify-items: "center";
+  align-items: center;
+  justify-items: center;
   text-decoration: none;
 }
 
 .title {
   font-size: 30px;
-  font-family: "Roboto";
-  font-weight: "bold";
+  font-family: Roboto;
+  font-weight: bold;
   text-align: center;
   text-decoration: none;
 }
@@ -27,7 +27,7 @@ body {
   margin-top: 10px;
   margin-left: 32.5%;
   background-color: white;
-  font-family: "Roboto";
+  font-family: Roboto;
   text-decoration: none;
 }
 
@@ -35,6 +35,6 @@ body {
   margin-top: 10px;
   margin-left: 9.5%;
   background-color: white;
-  font-family: "Roboto";
+  font-family: Roboto;
   text-decoration: none;
 }
