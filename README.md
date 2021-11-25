@@ -7,7 +7,7 @@ Za pomocą frameworku Spring zostało stworzone backend aplikacji. Obsługuje on
 - tworzenie rezerwacji biletów
 
 ## Frontend
-Stworzony w javascripcie przy pomocy ReactJS. Do stworzenia GUI użytkownika skorzystano z biblioteki Material-UI.
+Stworzony w javascripcie (przepisany na TypeScript) przy pomocy ReactJS. Do stworzenia GUI użytkownika skorzystano z biblioteki Material-UI.
 
 ## Autorzy
 - Piotr Tomczak - część frontend
